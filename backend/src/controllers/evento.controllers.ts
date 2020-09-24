@@ -16,7 +16,7 @@ export class EventoController
 
     public async crearEvento (req:Request, res:Response)
     {
-        let evento:IEvento = req.body;
+        let evento = req.body;
 
         const conec = await conexion();
 
