@@ -16,9 +16,9 @@ export class EventoController
 
     public async crearEvento (req:Request, res:Response)
     {
-        const conec = await conexion();
+        let evento:IEvento = req.body;
 
-        const evento = req.body;
+        const conec = await conexion();
 
         await conec.query("insert into evento set ?",[evento]);
     
