@@ -31,7 +31,7 @@ export class EventoController
 
         let id_evento =req.params.id;
 
-        await conec.query("delete from evento where id_evento = ?", id_evento);
+        await conec.query("delete from eventos where id_evento = ?", id_evento);
  
         return res.json('El evento ha sido Eliminado');
     }
@@ -44,7 +44,7 @@ export class EventoController
 
         let nueva_data = req.body;
 
-        await conec.query("update evento set ? where id_evento = ?", [nueva_data, id_evento]);
+        await conec.query("update eventos set ? where id_evento = ?", [nueva_data, id_evento]);
 
         return res.json('El elemento ha sido actualizado');
     }
@@ -55,7 +55,7 @@ export class EventoController
 
         let id_evento = req.params.id;
 
-        let unEvento = await conec.query("select * from evento where id_evento =?",[id_evento]);
+        let unEvento = await conec.query("select * from eventos where id_evento =?",[id_evento]);
 
         return res.json(unEvento[0]);
     }
