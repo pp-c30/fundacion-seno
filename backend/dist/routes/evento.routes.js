@@ -1,18 +1,12 @@
-import { Router } from "express";
-import { EventoController } from "../controllers/evento.controllers";
-
-const enrutadorEvento = Router();
-
-let eventoController = new EventoController();
-
-
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const evento_controllers_1 = require("../controllers/evento.controllers");
+const enrutadorEvento = express_1.Router();
+let eventoController = new evento_controllers_1.EventoController();
 enrutadorEvento.route('/evento').get(eventoController.listarEvento);
-
 enrutadorEvento.route('/evento').post(eventoController.crearEvento);
-
 enrutadorEvento.route('/evento/:id').delete(eventoController.eliminarEvento);
-
 enrutadorEvento.route('/evento/:id').put(eventoController.actualizarEvento);
-
 enrutadorEvento.route('/evento/:id').get(eventoController.obtenerEvento);
-export default enrutadorEvento;
+exports.default = enrutadorEvento;

@@ -10,46 +10,46 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const database_1 = require("../database");
-class EventoController {
-    listarEvento(req, res) {
+class CuidadosController {
+    listarCuidado(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const conec = yield database_1.conexion();
-            let evento = yield conec.query('select * from evento');
-            return res.json(evento);
+            let cuidados = yield conec.query('select * from cuidados');
+            return res.json(cuidados);
         });
     }
-    crearEvento(req, res) {
+    crearCuidado(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            let evento = req.body;
+            let cuidados = req.body;
             const conec = yield database_1.conexion();
-            yield conec.query("insert into evento set ?", [evento]);
+            yield conec.query("insert into cuidados set ?", [cuidados]);
             return res.json('El elemento fue agregado');
         });
     }
-    eliminarEvento(req, res) {
+    eliminarCuidado(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const conec = yield database_1.conexion();
-            let id_evento = req.params.id;
-            yield conec.query("delete from evento where id_evento = ?", id_evento);
+            let id_cuidados = req.params.id;
+            yield conec.query("delete from cuidados where id_cuidados = ?", id_cuidados);
             return res.json('El evento ha sido Eliminado');
         });
     }
-    actualizarEvento(req, res) {
+    actualizarCuidado(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const conec = yield database_1.conexion();
-            let id_evento = req.params.id;
+            let id_cuidados = req.params.id;
             let nueva_data = req.body;
-            yield conec.query("update evento set ? where id_evento = ?", [nueva_data, id_evento]);
+            yield conec.query("update cuidados set ? where id_cuidados = ?", [nueva_data, id_cuidados]);
             return res.json('El elemento ha sido actualizado');
         });
     }
-    obtenerEvento(req, res) {
+    obtenerCuidado(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const conec = yield database_1.conexion();
-            let id_evento = req.params.id;
-            let unEvento = yield conec.query("select * from evento where id_evento =?", [id_evento]);
-            return res.json(unEvento[0]);
+            let id_cuidados = req.params.id;
+            let cuida = yield conec.query("select * from cuidados where id_cuidados =?", [id_cuidados]);
+            return res.json(cuida[0]);
         });
     }
 }
-exports.EventoController = EventoController;
+exports.CuidadosController = CuidadosController;

@@ -10,46 +10,46 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const database_1 = require("../database");
-class EventoController {
-    listarEvento(req, res) {
+class CatgaleriaController {
+    listarCatgaleria(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const conec = yield database_1.conexion();
-            let evento = yield conec.query('select * from evento');
-            return res.json(evento);
+            let catgaleria = yield conec.query('select * from categoria_galeria');
+            return res.json(catgaleria);
         });
     }
-    crearEvento(req, res) {
+    crearCatgaleria(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            let evento = req.body;
+            let catgaleria = req.body;
             const conec = yield database_1.conexion();
-            yield conec.query("insert into evento set ?", [evento]);
+            yield conec.query("insert into categoria_galeria set ?", [catgaleria]);
             return res.json('El elemento fue agregado');
         });
     }
-    eliminarEvento(req, res) {
+    eliminarCatgaleria(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const conec = yield database_1.conexion();
-            let id_evento = req.params.id;
-            yield conec.query("delete from evento where id_evento = ?", id_evento);
+            let id_categoria = req.params.id;
+            yield conec.query("delete from categoria_galeria where id_categoria = ?", id_categoria);
             return res.json('El evento ha sido Eliminado');
         });
     }
-    actualizarEvento(req, res) {
+    actualizarCatgaleria(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const conec = yield database_1.conexion();
-            let id_evento = req.params.id;
+            let id_categoria = req.params.id;
             let nueva_data = req.body;
-            yield conec.query("update evento set ? where id_evento = ?", [nueva_data, id_evento]);
+            yield conec.query("update categoria_galeria set ? where id_categoria = ?", [nueva_data, id_categoria]);
             return res.json('El elemento ha sido actualizado');
         });
     }
-    obtenerEvento(req, res) {
+    obtenerCatgaleria(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const conec = yield database_1.conexion();
-            let id_evento = req.params.id;
-            let unEvento = yield conec.query("select * from evento where id_evento =?", [id_evento]);
-            return res.json(unEvento[0]);
+            let id_categoria = req.params.id;
+            let catga = yield conec.query("select * from categoria_galeria where id_categoria =?", [id_categoria]);
+            return res.json(catga[0]);
         });
     }
 }
-exports.EventoController = EventoController;
+exports.CatgaleriaController = CatgaleriaController;

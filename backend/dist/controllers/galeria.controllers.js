@@ -37,9 +37,9 @@ class GaleriaController {
     actualizarGaleria(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             let id_galeria = req.params.id;
-            let sensor = req.body;
+            let gale = req.body;
             let conex = yield database_1.conexion();
-            yield conex.query('update galeria set ? where id_galeria = ? ', [sensor, id_galeria]);
+            yield conex.query('update galeria set ? where id_galeria = ? ', [gale, id_galeria]);
             return res.json('El elemento se actualizo exitosamente');
         });
     }

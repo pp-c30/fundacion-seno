@@ -1,0 +1,12 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const catgaleria_controllers_1 = require("../controllers/catgaleria.controllers");
+const enrutadorCatgaleria = express_1.Router();
+let catgaleriaController = new catgaleria_controllers_1.CatgaleriaController();
+enrutadorCatgaleria.route('/categoria_galeria').get(catgaleriaController.listarCatgaleria);
+enrutadorCatgaleria.route('/categoria_galeria').post(catgaleriaController.crearCatgaleria);
+enrutadorCatgaleria.route('/categoria_galeria/:id').delete(catgaleriaController.eliminarCatgaleria);
+enrutadorCatgaleria.route('/categoria_galeria/:id').put(catgaleriaController.actualizarCatgaleria);
+enrutadorCatgaleria.route('/categoria_galeria/:id').get(catgaleriaController.obtenerCatgaleria);
+exports.default = enrutadorCatgaleria;
