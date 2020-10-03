@@ -1,0 +1,12 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const quienes_controllers_1 = require("../controllers/quienes.controllers");
+const enrutadorQuienes_somos = express_1.Router();
+let quienesController = new quienes_controllers_1.QuienesController();
+enrutadorQuienes_somos.route('/quienes_somos').get(quienesController.listarQuienes);
+enrutadorQuienes_somos.route('/quienes_somos').post(quienesController.crearQuienes);
+enrutadorQuienes_somos.route('/quienes_somos/:id').delete(quienesController.eliminarQuienes);
+enrutadorQuienes_somos.route('/quienes_somos/:id').put(quienesController.actualizarQuienes);
+enrutadorQuienes_somos.route('/quienes_somos/:id').get(quienesController.obtenerQuienes);
+exports.default = enrutadorQuienes_somos;

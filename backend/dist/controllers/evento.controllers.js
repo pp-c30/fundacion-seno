@@ -30,7 +30,7 @@ class EventoController {
         return __awaiter(this, void 0, void 0, function* () {
             const conec = yield database_1.conexion();
             let id_evento = req.params.id;
-            yield conec.query("delete from evento where id_evento = ?", id_evento);
+            yield conec.query("delete from eventos where id_evento = ?", id_evento);
             return res.json('El evento ha sido Eliminado');
         });
     }
@@ -39,7 +39,7 @@ class EventoController {
             const conec = yield database_1.conexion();
             let id_evento = req.params.id;
             let nueva_data = req.body;
-            yield conec.query("update evento set ? where id_evento = ?", [nueva_data, id_evento]);
+            yield conec.query("update eventos set ? where id_evento = ?", [nueva_data, id_evento]);
             return res.json('El elemento ha sido actualizado');
         });
     }
@@ -47,7 +47,7 @@ class EventoController {
         return __awaiter(this, void 0, void 0, function* () {
             const conec = yield database_1.conexion();
             let id_evento = req.params.id;
-            let unEvento = yield conec.query("select * from evento where id_evento =?", [id_evento]);
+            let unEvento = yield conec.query("select * from eventos where id_evento =?", [id_evento]);
             return res.json(unEvento[0]);
         });
     }

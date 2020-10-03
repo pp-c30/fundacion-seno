@@ -1,0 +1,12 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const cateventos_controllers_1 = require("../controllers/cateventos.controllers");
+const enrutadorCateven = express_1.Router();
+let cateventosController = new cateventos_controllers_1.CateventosController();
+enrutadorCateven.route('/categoria_eventos').get(cateventosController.listarCateventos);
+enrutadorCateven.route('/categoria_eventos').post(cateventosController.crearCateventos);
+enrutadorCateven.route('/categoria_eventos/:id').delete(cateventosController.eliminarCateventos);
+enrutadorCateven.route('/categoria_eventos/:id').put(cateventosController.actualizarCateventos);
+enrutadorCateven.route('/categoria_eventos/:id').get(cateventosController.obtenerCateventos);
+exports.default = enrutadorCateven;
