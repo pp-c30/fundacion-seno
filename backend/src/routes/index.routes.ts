@@ -1,6 +1,6 @@
 import { Router } from "express";
 
-import { mensaje } from "../controllers/index.controller";
+import { mensaje } from "../controllers/index.controllers";
 
 let enrutadorIndex = Router();
 

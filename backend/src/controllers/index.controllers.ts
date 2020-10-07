@@ -1,8 +1,7 @@
-import { Response,Request } from "express";
 
+import { Response, Request } from "express";
 
-
-export function mensaje_bienvenida(req:Request,res:Response)
+export function mensaje(req:Request, res:Response)
 {
-    return res.json('Bienvenido a nuestra Rest API');
+    return res.json("Esta es la ruta principal");
 }
