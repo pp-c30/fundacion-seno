@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-function mensaje_bienvenida(req, res) {
-    return res.json('Bienvenido a nuestra Rest API');
+function mensaje(req, res) {
+    return res.json("Esta es la ruta principal");
 }
-exports.mensaje_bienvenida = mensaje_bienvenida;
+exports.mensaje = mensaje;
