@@ -6,9 +6,7 @@ export interface IEvento{
     organizadora:string;
     categoria:number;
     responsable:string;
-    imagen:string;
     estado:any;
-    video:string;
     precio:number;
     estado_home:any;
 
