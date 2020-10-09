@@ -1,18 +1,11 @@
 import { Router } from "express";
 import { EventoController } from "../controllers/evento.controllers";
+import multer from "../libs/multer";
 
 const enrutadorEvento = Router();
 
 let eventoController = new EventoController();
 
+enrutadorEvento.route('/eventos').post(multer.array('img_evento'));
 
-enrutadorEvento.route('/eventos').get(eventoController.listarEvento);
-
-enrutadorEvento.route('/eventos').post(eventoController.crearEvento);
-
-enrutadorEvento.route('/eventos/:id').delete(eventoController.eliminarEvento);
-
-enrutadorEvento.route('/eventos/:id').put(eventoController.actualizarEvento);
-
-enrutadorEvento.route('/eventos/:id').get(eventoController.obtenerEvento);
 export default enrutadorEvento;
