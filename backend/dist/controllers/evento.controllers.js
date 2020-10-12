@@ -10,6 +10,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const database_1 = require("../database");
+cloudinary.v2.config({
+    claud_name: 'dj7l5ojza',
+    api_key: '566266184157444',
+    api_secret: 'Y3au0dyhsbHHgKNPK2pg67Vb_h8'
+});
 class EventoController {
     guardarEvento(req, res) {
         return __awaiter(this, void 0, void 0, function* () {

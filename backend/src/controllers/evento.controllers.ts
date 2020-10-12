@@ -2,6 +2,13 @@ import { conexion } from "../database";
 import { Request, Response } from "express";
 import { IEvento } from "../models/evento";
 
+cloudinary.v2.config({
+    claud_name:'dj7l5ojza',
+    api_key:'566266184157444',
+    api_secret:'Y3au0dyhsbHHgKNPK2pg67Vb_h8'
+
+});
+
 export class EventoController
 {
     public async guardarEvento(req:Request, res:Response)
