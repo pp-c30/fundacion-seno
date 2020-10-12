@@ -1,6 +1,9 @@
 import { conexion } from "../database";
 import { Request, Response } from "express";
 import { IEvento } from "../models/evento";
+import fs from "fs-extra";
+import cloudinary from "cloudinary";
+
 
 cloudinary.v2.config({
     claud_name:'dj7l5ojza',
@@ -40,12 +43,20 @@ export class EventoController
        const resultado = await db.query ('insert into eventos set?',[unEvento]);
 
        for (let i=0; i<files.length; i++){
+            //especifica al path(la ruta de la imagen en la carpeta upload)
+           const resultadodecloudinary = await cloudinary.v2.uploader.upload(files[i].path)
+
            const imagen_evento={
                id_evento:resultado.insertId,
-               imagen_url:files[i].path,
+               imagen_url:resultadodecloudinary.url,
+               public_id:resultadodecloudinary.public_id,
            }
+
           await db.query('insert into img_evento set ?',[imagen_evento])
-       }
+           
+          fs.unlink(files[i].path);
+        }
+
        res.json('se inserto exitosamente');
     }
 }
