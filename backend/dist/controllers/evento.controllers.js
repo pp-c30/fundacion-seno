@@ -8,9 +8,14 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const database_1 = require("../database");
-cloudinary.v2.config({
+const fs_extra_1 = __importDefault(require("fs-extra"));
+const cloudinary_1 = __importDefault(require("cloudinary"));
+cloudinary_1.default.v2.config({
     claud_name: 'dj7l5ojza',
     api_key: '566266184157444',
     api_secret: 'Y3au0dyhsbHHgKNPK2pg67Vb_h8'
@@ -42,11 +47,15 @@ class EventoController {
             };
             const resultado = yield db.query('insert into eventos set?', [unEvento]);
             for (let i = 0; i < files.length; i++) {
+                //especifica al path(la ruta de la imagen en la carpeta upload)
+                const resultadodecloudinary = yield cloudinary_1.default.v2.uploader.upload(files[i].path);
                 const imagen_evento = {
                     id_evento: resultado.insertId,
-                    imagen_url: files[i].path,
+                    imagen_url: resultadodecloudinary.url,
+                    public_id: resultadodecloudinary.public_id,
                 };
                 yield db.query('insert into img_evento set ?', [imagen_evento]);
+                fs_extra_1.default.unlink(files[i].path);
             }
             res.json('se inserto exitosamente');
         });
