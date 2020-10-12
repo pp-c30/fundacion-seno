@@ -6,6 +6,6 @@ const enrutadorEvento = Router();
 
 let eventoController = new EventoController();
 
-enrutadorEvento.route('/eventos').post(multer.array('img_evento'));
+enrutadorEvento.route('/eventos').post(multer.array('img_evento'),eventoController.guardarEvento);
 
 export default enrutadorEvento;
