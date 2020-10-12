@@ -48,16 +48,16 @@ class EventoController {
             const resultado = yield db.query('insert into eventos set?', [unEvento]);
             for (let i = 0; i < files.length; i++) {
                 //especifica al path(la ruta de la imagen en la carpeta upload)
-                const resultadodecloudinary = yield cloudinary_1.default.v2.uploader.upload(files[i].path);
-                const imagen_evento = {
+                const resultadode_cloudinary = yield cloudinary_1.default.v2.uploader.upload(files[i].path);
+                const img_evento = {
                     id_evento: resultado.insertId,
-                    imagen_url: resultadodecloudinary.url,
-                    public_id: resultadodecloudinary.public_id,
+                    imagen: resultadode_cloudinary.url,
+                    public_id: resultadode_cloudinary.public_id
                 };
-                yield db.query('insert into img_evento set ?', [imagen_evento]);
-                fs_extra_1.default.unlink(files[i].path);
+                yield db.query('insert into img_evento set ?', [img_evento]);
+                yield fs_extra_1.default.unlink(files[i].path);
+                res.json('se inserto exitosamente');
             }
-            res.json('se inserto exitosamente');
         });
     }
 }

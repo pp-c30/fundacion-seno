@@ -44,19 +44,22 @@ export class EventoController
 
        for (let i=0; i<files.length; i++){
             //especifica al path(la ruta de la imagen en la carpeta upload)
-           const resultadodecloudinary = await cloudinary.v2.uploader.upload(files[i].path)
+           const resultadode_cloudinary = await cloudinary.v2.uploader.upload(files[i].path);
 
-           const imagen_evento={
+           const img_evento={
                id_evento:resultado.insertId,
-               imagen_url:resultadodecloudinary.url,
-               public_id:resultadodecloudinary.public_id,
+               imagen:resultadode_cloudinary.url,
+               public_id:resultadode_cloudinary.public_id
            }
 
-          await db.query('insert into img_evento set ?',[imagen_evento])
+          await db.query('insert into img_evento set ?',[img_evento]);
            
-          fs.unlink(files[i].path);
+          await fs.unlink(files[i].path); 
+         
+          res.json('se inserto exitosamente');
         }
+        
 
-       res.json('se inserto exitosamente');
+       
     }
 }
