@@ -16,7 +16,7 @@ const database_1 = require("../database");
 const fs_extra_1 = __importDefault(require("fs-extra"));
 const cloudinary_1 = __importDefault(require("cloudinary"));
 cloudinary_1.default.v2.config({
-    claud_name: 'dj7l5ojza',
+    cloud_name: 'dj7l5ojza',
     api_key: '566266184157444',
     api_secret: 'Y3au0dyhsbHHgKNPK2pg67Vb_h8'
 });
@@ -56,8 +56,8 @@ class EventoController {
                 };
                 yield db.query('insert into img_evento set ?', [img_evento]);
                 yield fs_extra_1.default.unlink(files[i].path);
-                res.json('se inserto exitosamente');
             }
+            res.json('se inserto exitosamente');
         });
     }
 }

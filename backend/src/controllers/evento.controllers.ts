@@ -1,12 +1,12 @@
+
 import { conexion } from "../database";
 import { Request, Response } from "express";
 import { IEvento } from "../models/evento";
 import fs from "fs-extra";
 import cloudinary from "cloudinary";
 
-
 cloudinary.v2.config({
-    claud_name:'dj7l5ojza',
+    cloud_name:'dj7l5ojza',
     api_key:'566266184157444',
     api_secret:'Y3au0dyhsbHHgKNPK2pg67Vb_h8'
 
@@ -56,10 +56,7 @@ export class EventoController
            
           await fs.unlink(files[i].path); 
          
-          res.json('se inserto exitosamente');
         }
-        
-
-       
+        res.json('se inserto exitosamente');
     }
 }
