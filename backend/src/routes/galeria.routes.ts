@@ -1,14 +1,14 @@
 import { Router } from "express";
 import { GaleriaController } from "../controllers/galeria.controllers";
+import multer from "../libs/multer";
 
 const enrutadorGaleria = Router();
 
 let galeriaController = new GaleriaController();
 
+enrutadorGaleria.route('/galeria').post(multer.array('img_galeria'),galeriaController.guardarGaleria);
 
 enrutadorGaleria.route('/galeria').get(galeriaController.listarGaleria);
-
-enrutadorGaleria.route('/galeria').post(galeriaController.crearGaleria);
 
 enrutadorGaleria.route('/galeria/:id').delete(galeriaController.eliminarGaleria);
 
