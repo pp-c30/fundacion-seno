@@ -9,7 +9,7 @@ import enrutadorDonaciones from "./routes/donaciones.routes";
 import enrutadorEvento from "./routes/evento.routes";
 import enrutadorGaleria from "./routes/galeria.routes";
 import enrutadorLocalidad from "./routes/localidad.routes";
-import enrutadorProvincia from "./routes/provincia.route";
+import enrutadorProvincia from "./routes/provincia.routes";
 import enrutadorQuienes_somos from "./routes/quienes.routes";
 import morgan from 'morgan';
 import cors from "cors";

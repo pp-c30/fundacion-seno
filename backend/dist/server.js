@@ -23,7 +23,7 @@ const donaciones_routes_1 = __importDefault(require("./routes/donaciones.routes"
 const evento_routes_1 = __importDefault(require("./routes/evento.routes"));
 const galeria_routes_1 = __importDefault(require("./routes/galeria.routes"));
 const localidad_routes_1 = __importDefault(require("./routes/localidad.routes"));
-const provincia_route_1 = __importDefault(require("./routes/provincia.route"));
+const provincia_routes_1 = __importDefault(require("./routes/provincia.routes"));
 const quienes_routes_1 = __importDefault(require("./routes/quienes.routes"));
 const morgan_1 = __importDefault(require("morgan"));
 const cors_1 = __importDefault(require("cors"));
@@ -48,7 +48,7 @@ class Server {
         this.app.use(evento_routes_1.default);
         this.app.use(galeria_routes_1.default);
         this.app.use(localidad_routes_1.default);
-        this.app.use(provincia_route_1.default);
+        this.app.use(provincia_routes_1.default);
         this.app.use(quienes_routes_1.default);
         this.app.use(index_routes_1.default);
     }

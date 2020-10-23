@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { ProvinciaController } from "../controllers/provincia.controllers";
-import enrutadorDonaciones from "./donaciones.routes";
+
 
 const enrutadorProvincia = Router();
 
