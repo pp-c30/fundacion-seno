@@ -15,7 +15,7 @@ class ProvinciaController {
         return __awaiter(this, void 0, void 0, function* () {
             const conex = yield database_1.conexion();
             let provincia = yield conex.query('select * from provincia');
-            return res.json([provincia]);
+            return res.json(provincia);
         });
     }
     crearProvincia(req, res) {

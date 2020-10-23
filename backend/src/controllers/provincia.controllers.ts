@@ -9,7 +9,7 @@ export class ProvinciaController
 
         let provincia = await conex.query('select * from provincia');
 
-        return res.json([provincia]);
+        return res.json(provincia);
     }
 
     public async crearProvincia(req:Request, res:Response){

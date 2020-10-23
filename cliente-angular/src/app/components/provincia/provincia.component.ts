@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { IProvincia } from 'src/app/models/provincia';
 
 import { ProvinciaService } from "../../services/provincia.service";
 
@@ -8,7 +9,7 @@ import { ProvinciaService } from "../../services/provincia.service";
   styleUrls: ['./provincia.component.css']
 })
 export class ProvinciaComponent implements OnInit {
-  listProvincias = [];
+  listProvincias:IProvincia[] = [];
 
   constructor(private provinciaServ:ProvinciaService) { }
 
