@@ -20,7 +20,7 @@ export class ProvinciaComponent implements OnInit {
   {
     this.provinciaServ.getProvincia().subscribe(
       resultado => this.listProvincias = resultado,
-      error =>console.log(error)
+      error => console.log(error)
       
     )
   }
