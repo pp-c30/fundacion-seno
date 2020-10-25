@@ -14,8 +14,8 @@ import { MatListModule } from '@angular/material/list';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClient, HttpClientModule } from "@angular/common/http";
 import { LocalidadComponent } from "./components/localidad/localidad.component";
-import { ReactiveFormsModule } from "@angular/forms";
-
+import { ReactiveFormsModule, FormsModule } from "@angular/forms";
+import { Ng2SearchPipeModule } from "ng2-search-filter";
 
 
 
@@ -41,7 +41,10 @@ import { ReactiveFormsModule } from "@angular/forms";
     MatListModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule,
+    Ng2SearchPipeModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]

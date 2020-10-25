@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { IProvincia } from 'src/app/models/provincia';
 
 import { ProvinciaService } from "../../services/provincia.service";
-import { FormBuilder, FormGroup, Form } from "@angular/forms";
+import { FormBuilder, FormGroup, Form, Validators } from "@angular/forms";
 
 @Component({
   selector: 'app-provincia',
@@ -14,12 +14,14 @@ export class ProvinciaComponent implements OnInit {
 
   formProvincia: FormGroup;
 
+  buscarProvincia:any;
+
   constructor(private provinciaServ:ProvinciaService, private fb: FormBuilder) 
   { 
 
     this.formProvincia = this.fb.group({
       
-      descripcion:['']
+      descripcion:['',[Validators.required, Validators.minLength(4)]]
     })
 
   } 

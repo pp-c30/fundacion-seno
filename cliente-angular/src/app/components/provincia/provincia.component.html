@@ -2,6 +2,13 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-8">
+                <div class="row">
+                   <div class="col-sm-4">
+                       <div class="form-group">
+                        <input [(ngModel)]="buscarProvincia" type="text" class="form-control">
+                       </div>
+                   </div>
+                </div>
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -9,7 +16,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let provincia of listProvincias">
+                    <tr *ngFor="let provincia of listProvincias | filter:buscarProvincia">
                         <td>{{provincia.descripcion}}</td>
     
                     </tr>
@@ -21,12 +28,15 @@
             <div class="card">
                 <div class="card-header">Formulario de provincia</div>
                 <div class="card-body">
-                    <form [formGroup]="formProvincia" (ngSubmit)="guardarProvincia()" >
+                    <form [formGroup]="formProvincia" (ngSubmit)="guardarProvincia()" novalidate>
                         <div class="form-group">
-                        <input formControlName="descripcion" placeholder="Ingrese una provincia" type="text"class="form-control">
-
+                        <input [ngClass]="{'is-invalid': (formProvincia.get('descripcion')?.touched || formProvincia.get('descripcion')?.dirty) && formProvincia.get('descripcion')?.invalid }" formControlName="descripcion" placeholder="Ingrese una provincia" type="text"class="form-control">
+                            <div class="invalid-feedback">
+                                <span *ngIf="formProvincia.get('descripcion').hasError('required')">Campo requerido / </span>
+                                <span *ngIf="!formProvincia.get('descripcion').hasError('minLength')">Minimo de 4 caracteres</span>
+                            </div>
                         </div>
-                        <button class="btn btn-success">Guardar provincia</button>
+                        <button [disabled]="formProvincia.invalid" class="btn btn-success">Guardar provincia</button>
                     </form>
                 </div>
     
