@@ -14,4 +14,9 @@ export class ProvinciaService {
   {
     return this.http.get<IProvincia[]>('http://localhost:3000/provincia');
   }
+
+  saveProvincia()
+  {
+    this.http.post('http://localhost:3000/provincia')
+  }
 }
