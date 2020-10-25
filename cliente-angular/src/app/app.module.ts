@@ -14,6 +14,7 @@ import { MatListModule } from '@angular/material/list';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClient, HttpClientModule } from "@angular/common/http";
 import { LocalidadComponent } from "./components/localidad/localidad.component";
+import { ReactiveFormsModule } from "@angular/forms";
 
 
 
@@ -39,7 +40,8 @@ import { LocalidadComponent } from "./components/localidad/localidad.component";
     MatIconModule,
     MatListModule,
     BrowserAnimationsModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

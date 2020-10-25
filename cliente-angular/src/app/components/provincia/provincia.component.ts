@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { IProvincia } from 'src/app/models/provincia';
 
 import { ProvinciaService } from "../../services/provincia.service";
+import { FormBuilder, FormGroup, Form } from "@angular/forms";
 
 @Component({
   selector: 'app-provincia',
@@ -11,7 +12,17 @@ import { ProvinciaService } from "../../services/provincia.service";
 export class ProvinciaComponent implements OnInit {
   listProvincias:IProvincia[] = [];
 
-  constructor(private provinciaServ:ProvinciaService) { }
+  formProvincia: FormGroup;
+
+  constructor(private provinciaServ:ProvinciaService, private fb: FormBuilder) 
+  { 
+
+    this.formProvincia = this.fb.group({
+      
+      descripcion:['']
+    })
+
+  } 
 
   ngOnInit(): void {
     this.obtenerProvincia();
@@ -25,5 +36,17 @@ export class ProvinciaComponent implements OnInit {
       
     )
   }
-
+  guardarProvincia()
+  {
+    //console.log(this.formProvincia.value);
+    this.provinciaServ.saveProvincia(this.formProvincia.value).subscribe(
+      resultado =>{
+        console.log(resultado);
+        //se refresca la grilla
+        this.obtenerProvincia();
+        this.formProvincia.reset();
+      },
+      error => console.log(error)
+    );
+  }
 }
