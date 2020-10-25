@@ -20,4 +20,16 @@ export class ProvinciaService {
     return this.http.post('http://localhost:3000/provincia',unaProvincia);
     
   }
+
+  updateProvincia(unaProvincia:IProvincia)
+  {
+    let id:number = unaProvincia.id_provincia;
+    return this.http.put('http://localhost:3000/provincia/'+id,unaProvincia);
+  }
+
+  deleteProvincia(id:number)
+  {
+    return this.http.delete('http://localhost:3000/provincia/'+id);
+  }
+
 }

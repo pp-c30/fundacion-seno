@@ -40,15 +40,51 @@ export class ProvinciaComponent implements OnInit {
   }
   guardarProvincia()
   {
-    //console.log(this.formProvincia.value);
-    this.provinciaServ.saveProvincia(this.formProvincia.value).subscribe(
-      resultado =>{
-        console.log(resultado);
-        //se refresca la grilla
+    
+    if(this.formProvincia.value.id_provincia)
+    {
+      //se actualiza
+      this.provinciaServ.updateProvincia(this.formProvincia.value).subscribe(
+      respuesta =>{
+        console.log(respuesta);
         this.obtenerProvincia();
         this.formProvincia.reset();
       },
+        error => console.log(error)
+      )
+
+    }else{
+      this.provinciaServ.saveProvincia(this.formProvincia.value).subscribe(
+        resultado =>{
+          console.log(resultado);
+          //se refresca la grilla
+          this.obtenerProvincia();
+          this.formProvincia.reset();
+        },
+        error => console.log(error)
+      );
+
+    }
+    
+  }
+
+  editarProvincia(provincia:IProvincia)
+  { 
+    this.formProvincia.setValue(provincia)
+  }
+
+  eliminarProvincia(id:number)
+  {
+    if(confirm('Estas seguro que quieres eliminar esta provincia?')){
+      
+    this.provinciaServ.deleteProvincia(id).subscribe(
+      respuesta => {
+        console.log(respuesta);
+        this.obtenerProvincia();
+      },
       error => console.log(error)
-    );
+      );
+    }
+ 
   }
 }

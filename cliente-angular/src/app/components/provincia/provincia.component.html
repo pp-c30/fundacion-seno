@@ -12,12 +12,24 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
+                        <th>ID</th>
                         <th>Descripcion</th>
+                        <th>Operaciones</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr *ngFor="let provincia of listProvincias | filter:buscarProvincia">
                         <td>{{provincia.descripcion}}</td>
+                        <td>
+                            <div class="btn-group">
+                                <button (click)="eliminarProvincia(provincia.id_provincia);"mat-icon-button class="icon delete-icon btn btn-primary" aria-label="">
+                                    <mat-icon>delete</mat-icon>
+                                </button>
+                                <button (click)="editarProvincia(provincia)" mat-icon-button class="icon create-icon btn btn-info" aria-label="">
+                                    <mat-icon>create</mat-icon>
+                                </button>
+                            </div>
+                        </td>
     
                     </tr>
                 </tbody>
@@ -28,7 +40,10 @@
             <div class="card">
                 <div class="card-header">Formulario de provincia</div>
                 <div class="card-body">
-                    <form [formGroup]="formProvincia" (ngSubmit)="guardarProvincia()" novalidate>
+                    <form [formGroup]="formProvincia" (ngSubmit)="guardarProvincia()" >
+                        <div class="form-group" >
+                        <input formControlName="id_provincia" type="hidden"class="form-control" >
+                        </div>
                         <div class="form-group">
                         <input [ngClass]="{'is-invalid': (formProvincia.get('descripcion')?.touched || formProvincia.get('descripcion')?.dirty) && formProvincia.get('descripcion')?.invalid }" formControlName="descripcion" placeholder="Ingrese una provincia" type="text"class="form-control">
                             <div class="invalid-feedback">
