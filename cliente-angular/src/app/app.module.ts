@@ -16,6 +16,7 @@ import { HttpClient, HttpClientModule } from "@angular/common/http";
 import { LocalidadComponent } from "./components/localidad/localidad.component";
 import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 import { Ng2SearchPipeModule } from "ng2-search-filter";
+import { NgxPaginationModule } from "ngx-pagination";
 
 
 
@@ -43,7 +44,8 @@ import { Ng2SearchPipeModule } from "ng2-search-filter";
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
-    Ng2SearchPipeModule
+    Ng2SearchPipeModule,
+    NgxPaginationModule
 
   ],
   providers: [],

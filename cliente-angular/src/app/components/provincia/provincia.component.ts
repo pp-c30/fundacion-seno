@@ -16,6 +16,8 @@ export class ProvinciaComponent implements OnInit {
 
   buscarProvincia:any;
 
+  p:number = 1;
+
   constructor(private provinciaServ:ProvinciaService, private fb: FormBuilder) 
   { 
 
