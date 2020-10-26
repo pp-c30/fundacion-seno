@@ -24,12 +24,15 @@ export class ProvinciaController
 
     public async eliminarProvincia(req:Request, res:Response){
         const conex = await conexion();
-
         let id_provincia = req.params.id;
 
-        await conex.query('delete from provincia where id_provincia = ?',[id_provincia]);
+        try {
+            await conex.query('delete from provincia where id_provincia = ?',[id_provincia]);
+            return res.json("Provincia eliminada");
 
-        return res.json("Provincia eliminada");
+        } catch (error) {
+           return res.json("No se puede eliminar una provincia que este siendo utilizada por una localidad")
+        }
     }
 
     public async actualizarProvincia(req:Request, res:Response){

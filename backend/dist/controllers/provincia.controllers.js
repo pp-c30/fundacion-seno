@@ -30,8 +30,13 @@ class ProvinciaController {
         return __awaiter(this, void 0, void 0, function* () {
             const conex = yield database_1.conexion();
             let id_provincia = req.params.id;
-            yield conex.query('delete from provincia where id_provincia = ?', [id_provincia]);
-            return res.json("Provincia eliminada");
+            try {
+                yield conex.query('delete from provincia where id_provincia = ?', [id_provincia]);
+                return res.json("Provincia eliminada");
+            }
+            catch (error) {
+                return res.json("no se puede eliminar una provincia que este siendo utilisada por una localidad");
+            }
         });
     }
     actualizarProvincia(req, res) {

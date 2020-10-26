@@ -3,6 +3,7 @@ import { IProvincia } from 'src/app/models/provincia';
 
 import { ProvinciaService } from "../../services/provincia.service";
 import { FormBuilder, FormGroup, Form, Validators } from "@angular/forms";
+import { $ } from 'protractor';
 
 @Component({
   selector: 'app-provincia',
@@ -23,7 +24,8 @@ export class ProvinciaComponent implements OnInit {
 
     this.formProvincia = this.fb.group({
       
-      descripcion:['',[Validators.required, Validators.minLength(4)]]
+      descripcion:['',[Validators.required, Validators.minLength(4)]],
+      id_provincia:['']
     })
 
   } 
@@ -83,8 +85,10 @@ export class ProvinciaComponent implements OnInit {
       respuesta => {
         console.log(respuesta);
         this.obtenerProvincia();
+        alert(respuesta);
+        
       },
-      error => console.log(error)
+      error => alert("No se puede eliminar una provincia que este en uso")
       );
     }
  
