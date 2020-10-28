@@ -24,12 +24,15 @@ export class LocalidadController
 
     public async eliminarLocalidad(req:Request, res:Response){
         const conex = await conexion();
-
         let id_localidad = req.params.id;
 
-        await conex.query("delete from localidad where id_localidad = ?", id_localidad);
+        try {
+            await conex.query('delete from localidad where id_localidad = ?',[id_localidad]);
+            return res.json("Localidad eliminada");
 
-        return res.json('Localidad Eliminada');
+        } catch (error) {
+           return res.json("No se puede eliminar una localiadad que este siendo utilizada ")
+        }
     }
 
     public async actualizarLocalidad(req:Request, res:Response){

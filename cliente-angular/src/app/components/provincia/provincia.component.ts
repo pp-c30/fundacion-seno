@@ -67,9 +67,7 @@ export class ProvinciaComponent implements OnInit {
         },
         error => console.log(error)
       );
-
-    }
-    
+    }  
   }
 
   editarProvincia(provincia:IProvincia)
