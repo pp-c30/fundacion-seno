@@ -30,8 +30,13 @@ class LocalidadController {
         return __awaiter(this, void 0, void 0, function* () {
             const conex = yield database_1.conexion();
             let id_localidad = req.params.id;
-            yield conex.query("delete from localidad where id_localidad = ?", id_localidad);
-            return res.json('Localidad Eliminada');
+            try {
+                yield conex.query('delete from localidad where id_localidad = ?', [id_localidad]);
+                return res.json("Localidad eliminada");
+            }
+            catch (error) {
+                return res.json("No se puede eliminar una localiadad que este siendo utilizada ");
+            }
         });
     }
     actualizarLocalidad(req, res) {

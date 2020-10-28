@@ -35,7 +35,7 @@ class ProvinciaController {
                 return res.json("Provincia eliminada");
             }
             catch (error) {
-                return res.json("no se puede eliminar una provincia que este siendo utilisada por una localidad");
+                return res.json("No se puede eliminar una provincia que este siendo utilizada por una localidad");
             }
         });
     }

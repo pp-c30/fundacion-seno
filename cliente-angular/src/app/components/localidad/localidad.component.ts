@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ILocalidad } from "src/app/models/localidad";
+import { IProvincia } from "src/app/models/provincia";
 import { LocalidadService } from "../../services/localidad.service";
+import { ProvinciaService } from "../../services/provincia.service";
 import { FormBuilder, FormGroup, Form, Validators } from "@angular/forms";
 import { $ } from 'protractor';
 
@@ -11,6 +13,7 @@ import { $ } from 'protractor';
 })
 export class LocalidadComponent implements OnInit {
   listLocalidad:ILocalidad[] = [];
+  listProvincia:IProvincia[] = [];
 
   formLocalidad:FormGroup;
 
@@ -18,7 +21,7 @@ export class LocalidadComponent implements OnInit {
 
   p:number = 1;
 
-  constructor(private localidadServ:LocalidadService, private fb: FormBuilder) 
+  constructor(private localidadServ:LocalidadService, private fb: FormBuilder, private provinciaServ:ProvinciaService) 
   {
     this.formLocalidad = this.fb.group({
 
@@ -32,6 +35,7 @@ export class LocalidadComponent implements OnInit {
 
   ngOnInit(): void {
     this.obtenerLocalidad();
+    this.obtenerProvincias();
   }
 
   obtenerLocalidad()
@@ -91,6 +95,14 @@ export class LocalidadComponent implements OnInit {
       );
     }
  
+  }
+  obtenerProvincias()
+  {
+    this.provinciaServ.getProvincia().subscribe(
+      respuesta =>{
+        this.listProvincia = respuesta;
+      }
+    )
   }
 
 }

@@ -39,8 +39,8 @@ class AcompaniamientoController {
             const conex = yield database_1.conexion();
             let id_acomp = req.params.id;
             let nuevo_ac = req.body;
-            yield conex.query('update tipo_acompaniamiento set ? where id_acomp', [id_acomp, nuevo_ac]);
-            return res.json('Elemnto actualizado con exito');
+            yield conex.query('update tipo_acompaniamiento set ? where id_acomp = ?', [nuevo_ac, id_acomp]);
+            return res.json('Elemento actualizado con exito');
         });
     }
     obtenerAcomp(req, res) {
