@@ -18,6 +18,8 @@ import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 import { Ng2SearchPipeModule } from "ng2-search-filter";
 import { NgxPaginationModule } from "ngx-pagination";
 import { TipoAcompaniamientoComponent } from './components/tipo-acompaniamiento/tipo-acompaniamiento.component';
+import { CategoriaDonacionesComponent } from './components/categoria-donaciones/categoria-donaciones.component';
+import { DonacionesComponent } from './components/donaciones/donaciones.component';
 
 
 
@@ -27,7 +29,9 @@ import { TipoAcompaniamientoComponent } from './components/tipo-acompaniamiento/
     ProvinciaComponent,
     MenuComponent,
     LocalidadComponent,
-    TipoAcompaniamientoComponent
+    TipoAcompaniamientoComponent,
+    CategoriaDonacionesComponent,
+    DonacionesComponent
 
    
    

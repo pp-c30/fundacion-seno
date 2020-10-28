@@ -1,0 +1,24 @@
+<div class="container">
+    <div class="row">
+        <div class="col-sm-8">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Descripcion</th>
+                        <th>Operaciones</th>
+
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr *ngfor="let categoria_donaciones of listCatDon">
+                        <td>{{categoria_donaciones.id_categoria_donaciones}}</td>
+                        <td>{{categoria_donaciones.descripcion}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
