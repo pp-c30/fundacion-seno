@@ -50,6 +50,7 @@ export class CatgaleriaController
         await conec.query("update categoria_galeria set ? where id_categoria = ?", [nueva_data, id_categoria]);
 
         return res.json('El elemento ha sido actualizado');
+        
     }
 
     public async obtenerCatgaleria(req:Request, res:Response)
