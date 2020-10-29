@@ -30,10 +30,13 @@ export class CatgaleriaController
         const conec = await conexion();
 
         let id_categoria =req.params.id;
+        try {
+            await conec.query('delete from categoria_galeria where id_categoria = ?',[id_categoria]);
+            return res.json("Categoria eliminada");
 
-        await conec.query("delete from categoria_galeria where id_categoria = ?", id_categoria);
- 
-        return res.json('El evento ha sido Eliminado');
+        } catch (error) {
+           return res.json("No se puede eliminar una categoria que este siendo utilizada por galeria")
+        }
     }
 
     public async actualizarCatgaleria(req:Request, res:Response)

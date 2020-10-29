@@ -30,8 +30,13 @@ class AcompaniamientoController {
         return __awaiter(this, void 0, void 0, function* () {
             const conex = yield database_1.conexion();
             let id_acomp = req.params.id;
-            yield conex.query('delete from tipo_acompaniamiento where id_acomp = ?', id_acomp);
-            return res.json('Elemento eliminado con exito');
+            try {
+                yield conex.query('delete from tipo_acompaniamiento where id_acomp = ?', [id_acomp]);
+                return res.json("Tipo de acompañamiento eliminado");
+            }
+            catch (error) {
+                return res.json("No se puede eliminar un tipo de acompañamiento que esta siendo utilizado");
+            }
         });
     }
     actualizarAcomp(req, res) {

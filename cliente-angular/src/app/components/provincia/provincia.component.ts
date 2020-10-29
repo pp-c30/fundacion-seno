@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { IProvincia } from 'src/app/models/provincia';
-
 import { ProvinciaService } from "../../services/provincia.service";
 import { FormBuilder, FormGroup, Form, Validators } from "@angular/forms";
 import { $ } from 'protractor';

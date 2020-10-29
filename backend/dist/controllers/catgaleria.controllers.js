@@ -30,8 +30,13 @@ class CatgaleriaController {
         return __awaiter(this, void 0, void 0, function* () {
             const conec = yield database_1.conexion();
             let id_categoria = req.params.id;
-            yield conec.query("delete from categoria_galeria where id_categoria = ?", id_categoria);
-            return res.json('El evento ha sido Eliminado');
+            try {
+                yield conec.query('delete from categoria_galeria where id_categoria = ?', [id_categoria]);
+                return res.json("Categoria eliminada");
+            }
+            catch (error) {
+                return res.json("No se puede eliminar una categoria que este siendo utilizada por galeria");
+            }
         });
     }
     actualizarCatgaleria(req, res) {
