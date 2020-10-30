@@ -21,6 +21,7 @@ import { TipoAcompaniamientoComponent } from './components/tipo-acompaniamiento/
 import { CategoriaDonacionesComponent } from './components/categoria-donaciones/categoria-donaciones.component';
 import { DonacionesComponent } from './components/donaciones/donaciones.component';
 import { CategoriaGaleriaComponent } from './components/categoria-galeria/categoria-galeria.component';
+import { CategoriaEventoComponent } from './components/categoria-evento/categoria-evento.component';
 
 
 
@@ -33,7 +34,8 @@ import { CategoriaGaleriaComponent } from './components/categoria-galeria/catego
     TipoAcompaniamientoComponent,
     CategoriaDonacionesComponent,
     DonacionesComponent,
-    CategoriaGaleriaComponent
+    CategoriaGaleriaComponent,
+    CategoriaEventoComponent
 
    
    
