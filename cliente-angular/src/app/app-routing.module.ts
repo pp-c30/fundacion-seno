@@ -5,7 +5,7 @@ import { LocalidadComponent } from ".//components/localidad/localidad.component"
 import { TipoAcompaniamientoComponent } from ".//components/tipo-acompaniamiento/tipo-acompaniamiento.component";
 import { CategoriaDonacionesComponent } from "./components/categoria-donaciones/categoria-donaciones.component";
 import { CategoriaGaleriaComponent } from "./components/categoria-galeria/categoria-galeria.component";
-import { CategoriaGaleriaService } from './services/categoria-galeria.service';
+import { DonacionesComponent } from './components/donaciones/donaciones.component'
 
 const routes: Routes = [
   {
@@ -27,6 +27,9 @@ const routes: Routes = [
     },
   {
     path:"categoria-donaciones",component:CategoriaDonacionesComponent
+  },
+  {
+    path:"donaciones",component:DonacionesComponent
   },
 ];
 
