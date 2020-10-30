@@ -30,15 +30,61 @@ export class CategoriaDonacionesComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    this.obetenerCatDon();
+    this.obtenerCatDon();
   }
 
-  obetenerCatDon()
+  obtenerCatDon()
   {
     this.catdonServ.getCategoriaDon().subscribe(
       resultado => this.listCatDon = resultado,
       error => console.log(error)
     )
+  }
+
+  eliminarCatDon(id:number)
+  {
+    if(confirm('Estas seguro que quieres eliminar esta categoria?')){
+      
+      this.catdonServ.deleteCategoriaD(id).subscribe(
+        respuesta => {
+          console.log(respuesta);
+          this.obtenerCatDon();
+          alert(respuesta);
+          
+        },
+        error => alert("No se puede eliminar una categoria que este en uso")
+        );
+      }
+  }
+
+  guardarCatDon()
+  {
+    if(this.formCatego.value.id_categoria_donaciones)
+    {
+      this.catdonServ.updateCategoriaDon(this.formCatego.value).subscribe(
+      respuesta =>{
+        console.log(respuesta);
+        this.obtenerCatDon();
+        this.formCatego.reset();
+      },
+        error => console.log(error)
+      )
+
+    }else{
+      this.catdonServ.saveCategoriaDon(this.formCatego.value).subscribe(
+        resultado =>{
+          console.log(resultado);
+          this.obtenerCatDon();
+          this.formCatego.reset();
+        },
+        error => console.log(error)
+      );
+    }
+  }
+
+  editarCatDon(categoD:ICatDon)
+  {
+    this.formCatego.setValue(categoD);
   }
 
 }

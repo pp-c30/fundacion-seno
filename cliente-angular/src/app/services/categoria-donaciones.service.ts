@@ -26,7 +26,7 @@ export class CategoriaDonacionesService {
     return this.http.post('http://localhost:3000/categoria_donaciones',unaCategoD);
   }
 
-  deñeteCategoriaD(id:number)
+  deleteCategoriaD(id:number)
   {
     return this.http.delete('http://localhost:3000/categoria_donaciones'+id);
   }
