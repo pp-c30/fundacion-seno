@@ -30,8 +30,13 @@ class CateventosController {
         return __awaiter(this, void 0, void 0, function* () {
             const conex = yield database_1.conexion();
             let id_categoria_eventos = req.params.id;
-            yield conex.query('delete from categoria_eventos where id_categoria_eventos = ?', id_categoria_eventos);
-            return res.json('Categoria eliminada');
+            try {
+                yield conex.query('delete from categoria_eventos where id_categoria_eventos = ?', [id_categoria_eventos]);
+                return res.json("Categoria eliminada");
+            }
+            catch (error) {
+                return res.json("No se puede eliminar una categoria que este siendo utilizada ");
+            }
         });
     }
     actualizarCateventos(req, res) {
@@ -39,7 +44,7 @@ class CateventosController {
             const conex = yield database_1.conexion();
             let id_categoria_eventos = req.params.id;
             let nueva_Cateven = req.body;
-            yield conex.query('update categoria_eventos set ? where id_categoria_eventos', [id_categoria_eventos, nueva_Cateven]);
+            yield conex.query('update categoria_eventos set ? where id_categoria_eventos = ?', [nueva_Cateven, id_categoria_eventos]);
             return res.json('Categoria actualizada');
         });
     }
@@ -47,7 +52,7 @@ class CateventosController {
         return __awaiter(this, void 0, void 0, function* () {
             const conex = yield database_1.conexion();
             let id_categoria_eventos = req.params.id;
-            let unaCateven = yield conex.query("select * from categoria_eventos where id_categoria_eventos =?", [id_categoria_eventos]);
+            let unaCateven = yield conex.query("select * from categoria_eventos where id_categoria_eventos = ?", [id_categoria_eventos]);
             return res.json(unaCateven[0]);
         });
     }

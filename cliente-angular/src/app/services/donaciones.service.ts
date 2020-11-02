@@ -14,6 +14,11 @@ export class DonacionesService {
     return this.http.get<IDonaciones[]>('http://localhost:3000/donaciones');
   }
 
+  saveDonacion(unaDonacion:IDonaciones)
+  {
+    return this.http.post('http://localhost:3000/donaciones',unaDonacion);
+  }
+
   updateDonacion(unaDonacion:IDonaciones)
   {
     let id:number = unaDonacion.id_donaciones;
@@ -25,8 +30,4 @@ export class DonacionesService {
     return this.http.delete('http://localhost:3000/donaciones/'+id);  
   }
 
-  saveDonacion(unaDonacion:IDonaciones)
-  {
-    return this.http.post('http://localhost:3000/donaciones',unaDonacion)
-  }
 }

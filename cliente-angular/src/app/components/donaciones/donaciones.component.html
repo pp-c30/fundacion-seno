@@ -52,7 +52,7 @@
             <div class="card">
                 <div class="card-header">Formulario de donaciones</div>
                 <div class="card-body">
-                    <form [formGroup]="formDonacion" (ngSumbit)="guardarDonacion()">
+                    <form [formGroup]="formDonacion" (ngSubmit)="guardarDonacion()">
                         <div class="formGroup">
                             <input formControlName="id_donaciones" type="hidden" class="form-control">
                      </div>

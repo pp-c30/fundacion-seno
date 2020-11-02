@@ -29,10 +29,13 @@ export class CatdonacionesController
         const conex = await conexion();
 
         let id_categoria_donaciones =req.params.id;
+        try {
+            await conex.query('delete from categoria_donaciones where id_categoria_donaciones = ?',[id_categoria_donaciones]);
+            return res.json("Categoria eliminada");
 
-        await conex.query('delete from categoria_donaciones where id_categoria_donaciones = ?', id_categoria_donaciones);
-
-        return res.json('Categoria Eliminada');
+        } catch (error) {
+           return res.json("No se puede eliminar una categoria que este siendo utilizada ")
+        }
     }
 
     public async actualizarCatdonaciones(req:Request,res:Response){
@@ -42,7 +45,7 @@ export class CatdonacionesController
 
         let nueva_catdon = req.body;
 
-        await conex.query('update categoria_donaciones set ? where id_categoria_donaciones',[id_categoria_donaciones, nueva_catdon]);
+        await conex.query('update categoria_donaciones set ? where id_categoria_donaciones = ?',[ nueva_catdon,id_categoria_donaciones]);
 
         return res.json('Categoria Actualizada')
     }

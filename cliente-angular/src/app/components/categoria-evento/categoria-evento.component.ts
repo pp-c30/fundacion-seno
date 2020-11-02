@@ -18,62 +18,80 @@ export class CategoriaEventoComponent implements OnInit {
 
   p:number = 1;
 
-  constructor(private categoeServ:CategoriaEventoService, private fb: FormBuilder) { }
+  constructor(private categoServ:CategoriaEventoService, private fb: FormBuilder) 
+  {
+    this.formCategoE = this.fb.group({
+      
+      descripcion:['',[Validators.required, Validators.minLength(4)]],
+      id_categoria_eventos:['']
+    })
+
+  } 
 
   ngOnInit(): void {
+    this.obtenerCategoria();
   }
 
-  obtenerCategoE()
+  obtenerCategoria()
   {
-    this.categoeServ.getCategoE().subscribe(
+    this.categoServ.getCategoria().subscribe(
       resultado => this.listCategoE = resultado,
       error => console.log(error)
+      
     )
   }
-
-  guardarCategoE()
+  guardarCategoria()
   {
+    
     if(this.formCategoE.value.id_categoria_eventos)
     {
-      this.categoeServ.updateCategoE(this.formCategoE.value).subscribe(
+      //se actualiza
+      this.categoServ.updateCategoria(this.formCategoE.value).subscribe(
       respuesta =>{
         console.log(respuesta);
-        this.obtenerCategoE();
+        this.obtenerCategoria();
         this.formCategoE.reset();
       },
         error => console.log(error)
       )
 
     }else{
-      this.categoeServ.saveCategoE(this.formCategoE.value).subscribe(
+      this.categoServ.saveCategoria(this.formCategoE.value).subscribe(
         resultado =>{
           console.log(resultado);
-          this.obtenerCategoE();
+          //se refresca la grilla
+          this.obtenerCategoria();
           this.formCategoE.reset();
         },
         error => console.log(error)
       );
-    }
+    }  
   }
 
-  eliminarCategoE(id:number)
+  editarCategoria(categoria:ICategoE)
+  { 
+    this.formCategoE.setValue(categoria)
+  }
+
+  eliminarCategoria(id:number)
   {
     if(confirm('Estas seguro que quieres eliminar esta categoria?')){
       
-      this.categoeServ.deleteCategoE(id).subscribe(
-        respuesta => {
-          console.log(respuesta);
-          this.obtenerCategoE();
-          alert(respuesta);
-          
-        },
-        error => alert("No se puede eliminar una categoria que este en uso")
-        );
-      }
-  }
-
-  editarCategoE(categoE:ICategoE)
-  {
-    this.formCategoE.setValue(categoE);
+    this.categoServ.deleteCategoria(id).subscribe(
+      respuesta => {
+        console.log(respuesta);
+        this.obtenerCategoria();
+        alert(respuesta);
+        
+      },
+      error => alert("No se puede eliminar una categoria que este en uso")
+      );
+    }
+ 
   }
 }
+
+   
+
+  
+ 

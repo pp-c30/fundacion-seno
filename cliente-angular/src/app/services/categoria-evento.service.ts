@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { ICategoE } from "../models/categoria-evento";
+import { IconOptions } from '@angular/material/icon';
 
 @Injectable({
   providedIn: 'root'
@@ -9,24 +10,27 @@ export class CategoriaEventoService {
 
   constructor(private http:HttpClient) { }
 
-  getCategoE()
+  getCategoria()
   {
     return this.http.get<ICategoE[]>('http://localhost:3000/categoria_eventos');
   }
 
-  deleteCategoE(id:number)
+  saveCategoria(unaCatego:ICategoE)
   {
-    return this.http.delete('http://localhost:3000/categoria_eventos'+id);
+    return this.http.post('http://localhost:3000/categoria_eventos',unaCatego);
+    
   }
 
-  saveCategoE(unaCategoE:ICategoE)
+  updateCategoria(unaCatego:ICategoE)
   {
-    return this.http.post('http://localhost:3000/categoria_eventos',unaCategoE);
+    let id:number = unaCatego.id_categoria_eventos;
+    return this.http.put('http://localhost:3000/categoria_eventos/'+id,unaCatego);
   }
 
-  updateCategoE(unaCategoE:ICategoE)
+  deleteCategoria(id:number)
   {
-    let id:number = unaCategoE.id_categoria_eventos;
-    return this.http.put('http://localhost:3000/categoria_evento'+id,unaCategoE);
+    return this.http.delete('http://localhost:3000/categoria_eventos/'+id);
   }
+
 }
+
