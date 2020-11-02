@@ -17,12 +17,12 @@ export class DonacionesService {
   updateDonacion(unaDonacion:IDonaciones)
   {
     let id:number = unaDonacion.id_donaciones;
-    return this.http.put('http://localhost:3000/donaciones'+id,unaDonacion);
+    return this.http.put('http://localhost:3000/donaciones/'+id,unaDonacion);
   }
 
   deleteDonacion(id:number)
   {
-    return this.http.delete('http://localhost:3000/donaciones'+id);  
+    return this.http.delete('http://localhost:3000/donaciones/'+id);  
   }
 
   saveDonacion(unaDonacion:IDonaciones)
