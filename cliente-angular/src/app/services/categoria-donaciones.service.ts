@@ -15,4 +15,19 @@ export class CategoriaDonacionesService {
     return this.http.get<ICatDon[]>('http://localhost:3000/categoria_donaciones')
   }
 
+  updateCategoriaDon(unaCategoD:ICatDon)
+  {
+    let id:number = unaCategoD.id_categoria_donaciones;
+    return this.http.put('http://localhost:3000/categoria_donaciones'+id,unaCategoD);
+  }
+
+  saveCategoriaDon(unaCategoD:ICatDon)
+  {
+    return this.http.post('http://localhost:3000/categoria_donaciones',unaCategoD);
+  }
+
+  deleteCategoriaD(id:number)
+  {
+    return this.http.delete('http://localhost:3000/categoria_donaciones'+id);
+  }
 }
