@@ -53,6 +53,7 @@
                         <div class="form-group" >
                         <input formControlName="id_localidad" type="hidden"class="form-control" >
                         </div>
+
                         <div class="form-group">
                         <input [ngClass]="{'is-invalid': (formLocalidad.get('nombre')?.touched || formLocalidad.get('nombre')?.dirty) && formLocalidad.get('nombre')?.invalid }" formControlName="nombre" placeholder="Ingrese una localidad" type="text"class="form-control">
                             <div class="invalid-feedback">
@@ -60,18 +61,16 @@
                                 <span *ngIf="!formLocalidad.get('nombre').hasError('minLength')">Minimo de 4 caracteres</span>
                             </div>
                         </div>
+
                         <div class="form-group">
-                            
                             <select class="form-control" id="exampleFormControlSelect1" [ngClass]="{'is-invalid': (formLocalidad.get('provincia')?.touched || formLocalidad.get('provincia')?.dirty) && formLocalidad.get('provincia')?.invalid }" formControlName="provincia"  > 
                                 <option value="" disabled >Seleccione una provincia</option>
                                 <option *ngFor="let provincia of listProvincia" [value]="provincia.id_provincia"> {{provincia.descripcion}}</option>
-                        
                             </select>
                             <div class="invalid-feedback">
-                                <span *ngIf="formLocalidad.get('provincia').hasError('required')">Campo requerido  </span>
-                                
+                                <span *ngIf="formLocalidad.get('provincia').hasError('required')">Campo requerido  </span>  
                             </div>
-                          </div>
+                        </div>
 
                         <div class="form-group">
                             <input [ngClass]="{'is-invalid': (formLocalidad.get('codigo_postal')?.touched || formLocalidad.get('codigo_postal')?.dirty) && formLocalidad.get('codigo_postal')?.invalid }" formControlName="codigo_postal" placeholder="Ingrese un codigo postal" type="text"class="form-control">

@@ -7,6 +7,10 @@ import { CategoriaDonacionesComponent } from "./components/categoria-donaciones/
 import { CategoriaGaleriaComponent } from "./components/categoria-galeria/categoria-galeria.component";
 import { DonacionesComponent } from './components/donaciones/donaciones.component'
 import { CategoriaEventoComponent } from "./components/categoria-evento/categoria-evento.component";
+import { AdminDetalleEventoComponent } from './components/admin-detalle-evento/admin-detalle-evento.component';
+import { AdminEventoComponent } from "./components/admin-evento/admin-evento.component";
+import { EventosComponent } from "./components/eventos/eventos.component";
+import { EventoDetalleComponent } from "./components/evento-detalle/evento-detalle.component";
 
 
 const routes: Routes = [
@@ -17,6 +21,18 @@ const routes: Routes = [
   },
   {
     path:"provincia",component:ProvinciaComponent,
+  },
+  {
+    path:"evento-detalle",component:EventoDetalleComponent,
+  },
+  {
+    path:"eventos",component:EventosComponent,
+  },
+  {
+    path:"admin-detalle-evento/:id_evento",component:AdminDetalleEventoComponent,
+  },
+  {
+    path:"admin-evento",component:AdminEventoComponent,
   },
   {
     path:"categoria-galeria",component:CategoriaGaleriaComponent,

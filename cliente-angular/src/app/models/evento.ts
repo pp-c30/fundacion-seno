@@ -2,12 +2,11 @@ export interface IEvento{
     id_evento?:number;
     descripcion:string;
     titulo:string;
-    fecha_hora:Date;
+    fecha_hora:any;
     organizadora:string;
-    categoria:number;
+    categoria:any;
     responsable:string;
-    precio:number;
+    precio:any;
     estado_home:any;
-    
 
 }
