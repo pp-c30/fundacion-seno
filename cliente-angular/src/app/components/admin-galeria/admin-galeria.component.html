@@ -1,0 +1,109 @@
+<br>
+<div class="row">
+
+    <div class="col-lg-8">
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Descripcion</th>
+                <th>Fecha</th>
+                <th>Localidad</th>
+                <th>Categoria</th>
+                <th>Tipo</th>
+                <th>Estado</th>
+                <th>Operaciones</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr *ngFor="let galeria of listGaleria">
+                <td>{{galeria.id_galeria}}</td>
+                <td>{{galeria.descripcion}}</td>
+                <td>{{galeria.fecha}}</td>
+                <td>{{galeria.localidad}}</td>
+                <td>{{galeria.categoria}}</td>
+                <td>{{galeria.tipo}}</td>
+                <td>{{galeria.estado_home}}</td>
+                <td>
+                    <div class="btn-group">
+                        <button (click)="detalleGaleria(galeria.id_galeria)" mat-icon-button class="icon more-icon btn btn-primary">
+                            <mat-icon>more</mat-icon>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    </div>
+
+    <div class="col-lg-3">
+
+        <div class="card">
+
+            <div class="card-header">
+                Formulario Galeria
+            </div>
+            <div class="card-body">
+                <form [formGroup]="formGaleria" (ngSumbit)="guardarGaleria()">
+
+                    <div class="form-group">
+                        <textarea formControlName="descripcion" placeholder="Ingrese Descripcion" name="" id="" cols="30" rows="3" class="form-control"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <input formControlName="fecha" placeholder="Ingrese Fecha de la Imagen" type="date" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <select class="form-control" id="exampleFormControlSelect1" [ngClass]="{'is-invalid': (formGaleria.get('localidad')?.touched || formGaleria.get('localidad')?.dirty) && formGaleria.get('localidad')?.invalid }" formControlName="localidad" > 
+                            <option value="" disabled >Seleccione una localidad</option>
+                            <option *ngFor="let localidad of listLocalidad" [value]="localidad.id_localidad"> {{localidad.nombre}}</option>
+                    
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <select class="form-control" id="exampleFormControlSelect1" [ngClass]="{'is-invalid': (formGaleria.get('categoria')?.touched || formGaleria.get('categoria')?.dirty) && formGaleria.get('categoria')?.invalid }" formControlName="categoria" > 
+                            <option value="" disabled >Seleccione una Categoria</option>
+                            <option *ngFor="let categoria of listCategoG" [value]="categoria.id_categoria"> {{categoria.descripcion}}</option>
+                    
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <input formControlName="tipo" placeholder="Ingrese tipo" type="text" name="" value="" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <input formControlName="estado_home" placeholder="Ingrese estado" type="text" name="" value="" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <input (change)="mostrarImagenSeleccionada($event)" formControlName="file"  class="form-control-file" type="file" name="" id="" multiple>
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-success">Guardar Imagenes</button>
+                    </div>
+                </form>
+
+                <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+                      <div *ngFor="let url of imagenes_url; let isFirst = first" [ngClass]="{active:isFirst}" class="carousel-item ">
+                        <img [src]="url" class="d-block w-100" alt="...">
+                      </div>
+                    </div>
+                    <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                      <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                      <span class="sr-only">Next</span>
+                    </a>
+                  </div>
+
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<ngx-spinner style="color: white;">Cargando</ngx-spinner>

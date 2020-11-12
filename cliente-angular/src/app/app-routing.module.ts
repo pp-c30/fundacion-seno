@@ -7,7 +7,8 @@ import { CategoriaDonacionesComponent } from "./components/categoria-donaciones/
 import { CategoriaGaleriaComponent } from "./components/categoria-galeria/categoria-galeria.component";
 import { DonacionesComponent } from './components/donaciones/donaciones.component'
 import { CategoriaEventoComponent } from "./components/categoria-evento/categoria-evento.component";
-
+import { AdminGaleriaComponent } from "./components/admin-galeria/admin-galeria.component";
+import { AdminDetalleGaleriaComponent } from "src/app/components/admin-detalle-galeria/admin-detalle-galeria.component";
 
 const routes: Routes = [
   {
@@ -36,6 +37,12 @@ const routes: Routes = [
   {
     path:"categoria-evento",component:CategoriaEventoComponent
   },
+  {
+    path:"admin-galeria",component:AdminGaleriaComponent
+  },
+  {
+    path:"admin-detalle-galeria/:id_galeria",component:AdminDetalleGaleriaComponent
+  }
 ];
 
 @NgModule({

@@ -14,7 +14,7 @@ enrutadorGaleria.route('/galeria/:id').delete(galeriaController.eliminarGaleria)
 
 enrutadorGaleria.route('/galeria/:id').put(galeriaController.actualizarGaleria);
 
-enrutadorGaleria.route('/galeria/:id').get(galeriaController.obtenerGaleria);
+enrutadorGaleria.route('/galeria-imagen/:id').get(galeriaController.obtenerGaleria);
 export default enrutadorGaleria;
 
 

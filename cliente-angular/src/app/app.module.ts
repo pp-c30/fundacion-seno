@@ -22,7 +22,9 @@ import { CategoriaDonacionesComponent } from './components/categoria-donaciones/
 import { DonacionesComponent } from './components/donaciones/donaciones.component';
 import { CategoriaGaleriaComponent } from './components/categoria-galeria/categoria-galeria.component';
 import { CategoriaEventoComponent } from './components/categoria-evento/categoria-evento.component';
-
+import { AdminGaleriaComponent } from './components/admin-galeria/admin-galeria.component';
+import { AdminDetalleGaleriaComponent } from './components/admin-detalle-galeria/admin-detalle-galeria.component';
+import { NgxSpinnerModule } from "ngx-spinner";
 
 
 @NgModule({
@@ -35,8 +37,9 @@ import { CategoriaEventoComponent } from './components/categoria-evento/categori
     CategoriaDonacionesComponent,
     DonacionesComponent,
     CategoriaGaleriaComponent,
-    CategoriaEventoComponent
-
+    CategoriaEventoComponent,
+    AdminGaleriaComponent,
+    AdminDetalleGaleriaComponent
    
    
   ],
@@ -55,7 +58,8 @@ import { CategoriaEventoComponent } from './components/categoria-evento/categori
     ReactiveFormsModule,
     FormsModule,
     Ng2SearchPipeModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    NgxSpinnerModule
 
   ],
   providers: [],
