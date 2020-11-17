@@ -77,7 +77,7 @@ export class EventoController
     {
         const db = await conexion();
 
-        let eventos = await db.query('select * from eventos');
+        let eventos = await db.query('select *,date_format(fecha_hora,"%d/%m/%Y %H:%i:%s") as fecha_hora  from eventos');
         
         res.json(eventos);
     }
