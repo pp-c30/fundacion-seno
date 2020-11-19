@@ -21,14 +21,52 @@ cloudinary_1.default.v2.config({
     api_secret: 'Y3au0dyhsbHHgKNPK2pg67Vb_h8'
 });
 class CuidadosController {
-    listarCuidado(req, res) {
+    establecerPortada(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const conec = yield database_1.conexion();
-            let cuidados = yield conec.query('select * from cuidados');
-            return res.json(cuidados);
+            let id_img_cuidados = req.params.id_img_cuidados;
+            let id_cuidados = req.params.id_cuidados;
+            const db = yield database_1.conexion();
+            //primero ponemos todas las imagenes en portada 0(cero)
+            const portadasEnEstadoCero = {
+                portada: 0,
+            };
+            yield db.query('update img_cuidados set ? where id_cuidados = ? ', [portadasEnEstadoCero, id_cuidados]);
+            //establecer como portada una imagen
+            const datosImagenesCuidados = {
+                portada: 1,
+            };
+            yield db.query('update img_cuidados set ? where id_img_cuidados = ?', [datosImagenesCuidados, id_img_cuidados]);
+            //guardo la imagen que se eligio como portada en la tabla cuidados
+            const unaFila = yield db.query('select * from img_cuidados where id_img_cuidados = ?', [id_img_cuidados]);
+            let datosCuidados = {
+                imagen_portada: unaFila[0].imagen
+            };
+            //ahora guardamos (editamos) solo su url de la imagen en la tabla cuidados
+            yield db.query('update cuidados set ? where id_cuidados = ?', [datosCuidados, id_cuidados]);
+            res.json('Se establecio portada');
         });
     }
-    guardarCuidado(req, res) {
+    actualizarCuidados(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (!req.files) {
+                let unCuidado = req.body;
+                const updateCuidado = {
+                    descripcion: req.body.descripcion
+                };
+                const db = yield database_1.conexion();
+                yield db.query('update cuidados set ? where id_cuidados =?', [updateCuidado, req.body.id_cuidados]);
+                res.json('Se actualizo exitosamente');
+            }
+        });
+    }
+    listarCuidados(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const db = yield database_1.conexion();
+            let cuidados = yield db.query('select * from cuidados');
+            res.json(cuidados);
+        });
+    }
+    guardarCuidados(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const files = req.files;
             const des = req.body.descripcion;
@@ -36,7 +74,7 @@ class CuidadosController {
             const unCuidado = {
                 descripcion: des
             };
-            const resultado = yield db.query('insert into cuidados set?', [unCuidado]);
+            const resultado = yield db.query('insert into cuidados set? ', [unCuidado]);
             for (let i = 0; i < files.length; i++) {
                 //especifica al path(la ruta de la imagen en la carpeta upload)
                 const resultadode_cloudinary = yield cloudinary_1.default.v2.uploader.upload(files[i].path);
@@ -51,29 +89,54 @@ class CuidadosController {
             res.json('se inserto exitosamente');
         });
     }
-    eliminarCuidado(req, res) {
+    listarImagenesCuidados(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const conec = yield database_1.conexion();
-            let id_cuidados = req.params.id;
-            yield conec.query("delete from cuidados where id_cuidados = ?", id_cuidados);
-            return res.json('El evento ha sido Eliminado');
+            let id_cuidados = req.params.id_cuidados;
+            const db = yield database_1.conexion();
+            let lista_imagenes_cuidado = yield db.query('select * from img_cuidados where id_cuidados = ?', [id_cuidados]);
+            res.json(lista_imagenes_cuidado);
         });
     }
-    actualizarCuidado(req, res) {
+    agregarImagenesCuidados(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const conec = yield database_1.conexion();
-            let id_cuidados = req.params.id;
-            let nueva_data = req.body;
-            yield conec.query("update cuidados set ? where id_cuidados = ?", [nueva_data, id_cuidados]);
-            return res.json('El elemento ha sido actualizado');
+            const archivos = req.files;
+            let id_cuidados = req.params.id_cuidados;
+            const db = yield database_1.conexion();
+            for (let index = 0; index < archivos.length; index++) {
+                const resultado_cloud = yield cloudinary_1.default.v2.uploader.upload(archivos[index].path);
+                const imagen_cuidado = {
+                    id_cuidados: id_cuidados,
+                    imagen: resultado_cloud.url,
+                    public_id: resultado_cloud.public_id
+                };
+                yield db.query('insert into img_cuidados set ?', [imagen_cuidado]);
+                yield fs_extra_1.default.unlink(archivos[index].path);
+            }
+            res.json('Se agregaron las imagenes de manera exitosa');
         });
     }
-    obtenerCuidado(req, res) {
+    eliminarImagenesCuidados(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const conec = yield database_1.conexion();
-            let id_cuidados = req.params.id;
-            let cuida = yield conec.query("select * from cuidados where id_cuidados =?", [id_cuidados]);
-            return res.json(cuida[0]);
+            //conectarme a la base de datos
+            const db = yield database_1.conexion();
+            let id_img_cuidados = req.params.id_img_cuidados;
+            let public_id = req.params.public_id;
+            yield db.query('delete from img_cuidados where id_img_cuidados = ?', [id_img_cuidados]);
+            yield cloudinary_1.default.v2.uploader.destroy(public_id);
+            res.json('Se elimino exitosamente');
+        });
+    }
+    eliminarCuidados(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const db = yield database_1.conexion();
+            let id_cuidados = req.params.id_cuidados;
+            yield db.query('delete from cuidados where id_cuidados = ?', [id_cuidados]);
+            let lista_imagenes_cuidado = yield db.query('select * from img_cuidados where id_cuidados = ?', [id_cuidados]);
+            for (let index = 0; index < lista_imagenes_cuidado.length; index++) {
+                yield cloudinary_1.default.v2.uploader.destroy(lista_imagenes_cuidado[index].public_id);
+            }
+            yield db.query('delete from img_cuidados where id_cuidados =?', [id_cuidados]);
+            res.json('Se elimino completamente el cuidado');
         });
     }
 }

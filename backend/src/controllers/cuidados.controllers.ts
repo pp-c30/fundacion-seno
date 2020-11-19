@@ -12,29 +12,81 @@ cloudinary.v2.config({
 });
 export class CuidadosController
 {
-    public async listarCuidado(req:Request, res:Response)
+
+    public async establecerPortada(req:Request, res:Response)
     {
-        const conec = await conexion();
+        let id_img_cuidados = req.params.id_img_cuidados;
 
-        let cuidados = await conec.query('select * from cuidados');
+        let id_cuidados =req.params.id_cuidados;
 
-        return res.json(cuidados);
+        const db = await conexion();
+
+        //primero ponemos todas las imagenes en portada 0(cero)
+        const portadasEnEstadoCero={
+            portada:0,
+        }
+        await db.query('update img_cuidados set ? where id_cuidados = ? ',[portadasEnEstadoCero,id_cuidados]);
+
+        //establecer como portada una imagen
+        const datosImagenesCuidados={
+            portada:1,
+        }
+        await db.query('update img_cuidados set ? where id_img_cuidados = ?',[datosImagenesCuidados,id_img_cuidados]);
+
+        //guardo la imagen que se eligio como portada en la tabla cuidados
+        const unaFila = await db.query('select * from img_cuidados where id_img_cuidados = ?',[id_img_cuidados]);
+
+        let datosCuidados = {
+            imagen_portada:unaFila[0].imagen
+        }
+
+        //ahora guardamos (editamos) solo su url de la imagen en la tabla cuidados
+        await db.query('update cuidados set ? where id_cuidados = ?',[datosCuidados,id_cuidados]);
+
+        res.json('Se establecio portada');
+    }
+
+    public async actualizarCuidados(req:Request, res:Response)
+    {
+        if(!req.files)
+        {
+            let unCuidado = req.body;
+            
+            const updateCuidado ={
+                descripcion:req.body.descripcion
+            }
+            const db = await conexion();
+
+            await db.query('update cuidados set ? where id_cuidados =?',[updateCuidado, req.body.id_cuidados]);
+
+            res.json('Se actualizo exitosamente');
+        }
 
     }
 
-    
-    public async guardarCuidado(req:Request, res:Response)
+    public async listarCuidados(req:Request, res:Response)
+    {
+        const db = await conexion();
+
+        let cuidados = await db.query('select * from cuidados');
+        
+        res.json(cuidados);
+    }
+
+
+    public async guardarCuidados(req:Request, res:Response)
     {
        const files:any = req.files;
-     
-       const des = req.body.descripcion; 
     
+       const des = req.body.descripcion; 
+     
        const db = await conexion();
        const unCuidado = {    
-    
+           
            descripcion:des
+         
        }
-       const resultado = await db.query ('insert into cuidados set?',[unCuidado]);
+       const resultado = await db.query ('insert into cuidados set? ',[unCuidado]);
 
        for (let i=0; i<files.length; i++){
             //especifica al path(la ruta de la imagen en la carpeta upload)
@@ -54,39 +106,77 @@ export class CuidadosController
         res.json('se inserto exitosamente');
     }
 
-    public async eliminarCuidado(req:Request, res:Response)
+    public async listarImagenesCuidados(req:Request, res:Response)
     {
-        const conec = await conexion();
+        let id_cuidados = req.params.id_cuidados;
 
-        let id_cuidados =req.params.id;
+        const db = await conexion();
 
-        await conec.query("delete from cuidados where id_cuidados = ?", id_cuidados);
+        let lista_imagenes_cuidado = await db.query('select * from img_cuidados where id_cuidados = ?',[id_cuidados])
+        
+        res.json(lista_imagenes_cuidado);
+    }
+
+    public async agregarImagenesCuidados(req:Request, res:Response)
+    {
+        const archivos:any = req.files;
+
+        let id_cuidados = req.params.id_cuidados;
+
+        const db = await conexion();
+
+        for (let index = 0; index < archivos.length; index++) {
+        
+            const resultado_cloud = await cloudinary.v2.uploader.upload(archivos[index].path);
+
+            const imagen_cuidado = {
+                id_cuidados:id_cuidados,
+                imagen:resultado_cloud.url,
+                public_id:resultado_cloud.public_id
+            }
+            await db.query('insert into img_cuidados set ?',[imagen_cuidado]);
+
+            await fs.unlink(archivos[index].path);
+        }
+        
+        res.json('Se agregaron las imagenes de manera exitosa')
+    }
+
+    public async eliminarImagenesCuidados(req:Request, res:Response)
+    {
+        //conectarme a la base de datos
+        const db = await conexion();
+        
+        let id_img_cuidados = req.params.id_img_cuidados;
+        
+        let public_id =req.params.public_id;
+
+        await db.query('delete from img_cuidados where id_img_cuidados = ?',[id_img_cuidados]);
+
+        await cloudinary.v2.uploader.destroy(public_id);
  
-        return res.json('El evento ha sido Eliminado');
+        res.json('Se elimino exitosamente');
     }
 
-    public async actualizarCuidado(req:Request, res:Response)
+    public async eliminarCuidados(req:Request, res:Response)
     {
-        const conec = await conexion();
+        const db = await conexion();
 
-        let id_cuidados = req.params.id;
+        let id_cuidados = req.params.id_cuidados;
 
-        let nueva_data = req.body;
+        await db.query('delete from cuidados where id_cuidados = ?',[id_cuidados]);
 
-        await conec.query("update cuidados set ? where id_cuidados = ?", [nueva_data, id_cuidados]);
+        let lista_imagenes_cuidado = await db.query('select * from img_cuidados where id_cuidados = ?',[id_cuidados]);
 
-        return res.json('El elemento ha sido actualizado');
+        for (let index = 0; index < lista_imagenes_cuidado.length; index++) {
+            await cloudinary.v2.uploader.destroy(lista_imagenes_cuidado[index].public_id);        
+        }
+
+        await db.query('delete from img_cuidados where id_cuidados =?',[id_cuidados]);
+        
+        res.json('Se elimino completamente el cuidado');
+          
     }
 
-    public async obtenerCuidado(req:Request, res:Response)
-    {
-        const conec = await conexion();
-
-        let id_cuidados = req.params.id;
-
-        let cuida = await conec.query("select * from cuidados where id_cuidados =?",[id_cuidados]);
-
-        return res.json(cuida[0]);
-    }
 
 }

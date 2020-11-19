@@ -3,6 +3,4 @@ export interface IEventoDetalle{
     id_evento?:number;
     imagen:string;
     public_id:string;
-    
-
 }

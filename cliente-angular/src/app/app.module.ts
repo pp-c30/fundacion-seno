@@ -22,18 +22,21 @@ import { CategoriaDonacionesComponent } from './components/categoria-donaciones/
 import { DonacionesComponent } from './components/donaciones/donaciones.component';
 import { CategoriaGaleriaComponent } from './components/categoria-galeria/categoria-galeria.component';
 import { CategoriaEventoComponent } from './components/categoria-evento/categoria-evento.component';
-<<<<<<< HEAD
+
 import { AdminGaleriaComponent } from './components/admin-galeria/admin-galeria.component';
 import { AdminDetalleGaleriaComponent } from './components/admin-detalle-galeria/admin-detalle-galeria.component';
 import { NgxSpinnerModule } from "ngx-spinner";
-=======
+
 import { AdminEventoComponent } from './components/admin-evento/admin-evento.component';
 import { AdminDetalleEventoComponent } from './components/admin-detalle-evento/admin-detalle-evento.component';
-import { NgxSpinnerModule } from "ngx-spinner";
+
 import { EventosComponent } from './components/eventos/eventos.component';
 import { EventoDetalleComponent } from './components/evento-detalle/evento-detalle.component';
+import { CuidadosComponent } from './components/cuidados/cuidados.component';
+import { CuidadosDetalleComponent } from './components/cuidados-detalle/cuidados-detalle.component';
+import { AdminDetalleCuidadosComponent } from './components/admin-detalle-cuidados/admin-detalle-cuidados.component';
+import { AdminCuidadosComponent } from './components/admin-cuidados/admin-cuidados.component';
 
->>>>>>> 3e3e6e1085ef80b5bb785f36a751f407d0bd6205
 
 
 @NgModule({
@@ -47,16 +50,19 @@ import { EventoDetalleComponent } from './components/evento-detalle/evento-detal
     DonacionesComponent,
     CategoriaGaleriaComponent,
     CategoriaEventoComponent,
-<<<<<<< HEAD
+
     AdminGaleriaComponent,
-    AdminDetalleGaleriaComponent
-=======
+    AdminDetalleGaleriaComponent,
     AdminEventoComponent,
     AdminDetalleEventoComponent,
     EventosComponent,
-    EventoDetalleComponent
+    EventoDetalleComponent,
+    CuidadosComponent,
+    CuidadosDetalleComponent,
+    AdminDetalleCuidadosComponent,
+    AdminCuidadosComponent
 
->>>>>>> 3e3e6e1085ef80b5bb785f36a751f407d0bd6205
+
    
    
   ],

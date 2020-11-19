@@ -1,18 +1,27 @@
 import { Router } from "express";
 import { CuidadosController } from "../controllers/cuidados.controllers";
 import multer from "../libs/multer";
+import enrutadorEvento from "./evento.routes";
 const enrutadorCcuidados = Router();
 
 let cuidadosController = new CuidadosController();
 
 
-enrutadorCcuidados.route('/cuidados').post(multer.array('img_cuidados'),cuidadosController.guardarCuidado)
+enrutadorCcuidados.route('/cuidados').post(multer.array('img_cuidados'),cuidadosController.guardarCuidados);
 
-enrutadorCcuidados.route('/cuidados').get(cuidadosController.listarCuidado);
+enrutadorCcuidados.route('/cuidados').get(cuidadosController.listarCuidados);
 
-enrutadorCcuidados.route('/cuidados/:id').delete(cuidadosController.eliminarCuidado);
+enrutadorCcuidados.route('/cuidados-imagenes/:id_cuidados').get(cuidadosController.listarImagenesCuidados);
 
-enrutadorCcuidados.route('/cuidados/:id').put(cuidadosController.actualizarCuidado);
+enrutadorCcuidados.route('/agregar-imagenes-cuidados/:id_cuidados').put(multer.array('img_cuidados'),cuidadosController.agregarImagenesCuidados);
 
-enrutadorCcuidados.route('/cuidados/:id').get(cuidadosController.obtenerCuidado);
+enrutadorCcuidados.route('/detalles-imagen-cuidados/:id_img_cuidados/:public_id').delete(cuidadosController.eliminarImagenesCuidados);
+
+enrutadorCcuidados.route('/cuidados/:id_cuidados').delete(cuidadosController.eliminarCuidados);
+
+enrutadorCcuidados.route('/cuidados/:id_cuidados').put(cuidadosController.actualizarCuidados);
+
+enrutadorCcuidados.route('/cuidados-portada/:id_img_cuidados/:id_cuidados').get(cuidadosController.establecerPortada);
+
+
 export default enrutadorCcuidados ;
