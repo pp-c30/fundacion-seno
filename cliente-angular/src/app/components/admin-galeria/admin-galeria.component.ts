@@ -75,6 +75,7 @@ export class AdminGaleriaComponent implements OnInit {
   }
 
   guardarGaleria(){
+    if (this.formGaleria.value.id_galeria){
     this.spinner.show();
     this.galeriaServ.saveGaleria(this.formGaleria.value, this.file).subscribe(
       resultado =>{
@@ -87,7 +88,23 @@ export class AdminGaleriaComponent implements OnInit {
       },
       error => console.log(error)
     )
-  }
+    }else{
+    this.spinner.show();
+    this.galeriaServ.saveGaleria(this.formGaleria.value,this.file).subscribe(
+      resultado =>{
+        console.log(resultado);
+        this.imagenes_url =[];
+        this.obtenerGaleria();
+        this.formGaleria.reset();
+        this.spinner.hide();
+      },
+      error => console.log(error)
+    );
+    } 
+} 
+
+
+
 
   mostrarImagenSeleccionada(evento:IHtmlInputEvent){
 
@@ -116,4 +133,18 @@ export class AdminGaleriaComponent implements OnInit {
   {
     this.router.navigate(['/admin-detalle-galeria',id_galeria])
   } 
+
+  eliminarGaleria(id_galeria:number)
+  {
+    if(confirm('Desea Eliminar esta Galeria?')){
+      
+      this.galeriaServ.deleteGaleria(id_galeria).subscribe(
+        resultado =>{
+          console.log(resultado)
+          this.obtenerGaleria();
+        }
+      );
+    }
+
+  }
 }

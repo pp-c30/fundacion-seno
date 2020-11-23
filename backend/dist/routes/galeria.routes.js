@@ -12,5 +12,6 @@ enrutadorGaleria.route('/galeria').post(multer_1.default.array('img_galeria'), g
 enrutadorGaleria.route('/galeria').get(galeriaController.listarGaleria);
 enrutadorGaleria.route('/galeria/:id').delete(galeriaController.eliminarGaleria);
 enrutadorGaleria.route('/galeria/:id').put(galeriaController.actualizarGaleria);
-enrutadorGaleria.route('/galeria-imagen/:id').get(galeriaController.obtenerGaleria);
+enrutadorGaleria.route('/galeria-imagen/:id_galeria').get(galeriaController.obtenerGaleria);
+enrutadorGaleria.route('/agregar-imagenes-galeria/:id_galeria').put(multer_1.default.array('img_galeria'), galeriaController.agregarImagenesGaleria);
 exports.default = enrutadorGaleria;

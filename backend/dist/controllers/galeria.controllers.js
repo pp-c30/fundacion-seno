@@ -16,15 +16,15 @@ const database_1 = require("../database");
 const fs_extra_1 = __importDefault(require("fs-extra"));
 const cloudinary_1 = __importDefault(require("cloudinary"));
 cloudinary_1.default.v2.config({
-    cloud_name: 'dj7l5ojza',
-    api_key: '566266184157444',
-    api_secret: 'Y3au0dyhsbHHgKNPK2pg67Vb_h8'
+    cloud_name: 'depxqeimu',
+    api_key: '319511783793755',
+    api_secret: 'ct-xrgsM7GwILBH6HHpRATy2Kmc'
 });
 class GaleriaController {
     listarGaleria(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const conex = yield database_1.conexion();
-            let galeria = yield conex.query('select * from galeria');
+            const db = yield database_1.conexion();
+            let galeria = yield db.query('select * from galeria');
             return res.json(galeria);
         });
     }
@@ -80,10 +80,28 @@ class GaleriaController {
     }
     obtenerGaleria(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            let id_galeria = req.params.id;
-            let conex = yield database_1.conexion();
-            let gal = yield conex.query('select * from galeria where id_galeria = ?', [id_galeria]);
-            return res.json(gal[0]);
+            let id_galeria = req.params.id_galeria;
+            const db = yield database_1.conexion();
+            let lista_imagenes_galeria = yield db.query('select * from img_galeria where id_galeria = ?', [id_galeria]);
+            res.json(lista_imagenes_galeria);
+        });
+    }
+    agregarImagenesGaleria(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const archivos = req.files;
+            let id_galeria = req.params.id_galeria;
+            const db = yield database_1.conexion();
+            for (let index = 0; index < archivos.length; index++) {
+                const resultado_cloud = yield cloudinary_1.default.v2.uploader.upload(archivos[index].path);
+                const imagen_galeria = {
+                    id_galeria: id_galeria,
+                    imagen_url: resultado_cloud.url,
+                    public_id: resultado_cloud.public_id
+                };
+                yield db.query('insert into img_galeria set ?', [imagen_galeria]);
+                yield fs_extra_1.default.unlink(archivos[index].path);
+            }
+            res.json('Se agregaron las Imagenes');
         });
     }
 }

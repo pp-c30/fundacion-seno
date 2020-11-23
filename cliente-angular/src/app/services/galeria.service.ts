@@ -40,4 +40,27 @@ export class GaleriaService {
    {
      return this.http.get<IGaleriaDetalle[]>('http://localhost:3000/galeria-imagen/'+id_galeria)
    }
+
+   addImageGaleria(id_galeria:number, files:FileList)
+   {
+    const fd = new FormData();
+
+    for (let index = 0; index < files.length; index++) {
+     
+      fd.append('img_galeria',files[index]);
+      
+    }
+
+    return this.http.put('http://localhost:3000/agregar-imagenes-galeria/'+id_galeria,fd);
+   }
+
+   deleteImageGaleria(id_img_galeria:number,public_id:string)
+   {
+    return this.http.delete('http://localhost:3000/detalle-imagen-galeria/'+id_img_galeria+'/'+public_id)
+   }
+
+   deleteGaleria(id_galeria:number)
+   {
+     return this.http.delete('http://localhost:3000/galeria/'+id_galeria);
+   }
 }

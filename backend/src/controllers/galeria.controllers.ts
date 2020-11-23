@@ -5,9 +5,9 @@ import fs from "fs-extra";
 import cloudinary from "cloudinary";
 
 cloudinary.v2.config({
-    cloud_name:'dj7l5ojza',
-    api_key:'566266184157444',
-    api_secret:'Y3au0dyhsbHHgKNPK2pg67Vb_h8'
+    cloud_name:'depxqeimu',
+    api_key:'319511783793755',
+    api_secret:'ct-xrgsM7GwILBH6HHpRATy2Kmc'
 
 });
 
@@ -15,9 +15,9 @@ export class GaleriaController
 {
     public async listarGaleria(req:Request,res:Response)
     {
-        const conex= await conexion();
+        const db= await conexion();
 
-        let galeria = await conex.query('select * from galeria');
+        let galeria = await db.query('select * from galeria');
 
         return res.json(galeria);
     }
@@ -69,11 +69,19 @@ export class GaleriaController
     {
         let id_galeria = req.params.id;
 
-        let conex = await conexion();
+        let db = await conexion();
 
-        await conex.query('delete from galeria where id_galeria = ?',id_galeria);
+        await db.query('delete from galeria where id_galeria = ?',[id_galeria]);
 
-        return res.json('El elemento se ha eliminado exitosamente');
+        let lista_imagenes_galeria = await db.query('select * from img_evento where id_galeria = ?',[id_galeria]);
+
+        for (let index = 0; index < lista_imagenes_galeria.length; index++) {
+           
+            await cloudinary.v2.uploader.destroy(lista_imagenes_galeria[index].public_id);
+        }
+        await db.query('delete from img_galeria where id_galeria = ?',[id_galeria]);
+
+        return res.json('Se elimino la galeria completa');
     }
 
     public async actualizarGaleria(req:Request,res:Response)
@@ -92,13 +100,51 @@ export class GaleriaController
 
     public async obtenerGaleria(req:Request,res:Response)
     {
-        let id_galeria = req.params.id;
+        let id_galeria = req.params.id_galeria;
 
-        let conex = await conexion();
+        const db = await conexion();
         
-        let gal = await conex.query('select * from galeria where id_galeria = ?' ,[id_galeria]);
+        let lista_imagenes_galeria = await db.query('select * from img_galeria where id_galeria = ?' ,[id_galeria]);
         
-        return res.json(gal[0]);
+         res.json(lista_imagenes_galeria);
+    }
+
+    public async agregarImagenesGaleria(req:Request, res:Response)
+    {
+        const archivos:any = req.files;
+
+        let id_galeria = req.params.id_galeria;
+
+        const db = await conexion();
+
+        for (let index = 0; index < archivos.length; index++) {
+            
+            const resultado_cloud = await cloudinary.v2.uploader.upload(archivos[index].path);
+
+            const imagen_galeria = {
+                id_galeria:id_galeria,
+                imagen_url:resultado_cloud.url,
+                public_id:resultado_cloud.public_id
+            }
+
+                await db.query('insert into img_galeria set ?',[imagen_galeria]);
+
+                await fs.unlink(archivos[index].path)
+        }
+        res.json('Se agregaron las Imagenes')
+    }
+
+    public async eliminarImagenGaleria(req:Request,res:Response)
+    {
+        let id_img_galeria = req.params.id_img_galeria;
+        let public_id = req.params.public_id;
+
+        //conectarme a la base de datos
+        const db = await conexion();
+        await db.query('delete from img_galeria where id_img_galeria = ?',[id_img_galeria]);
+        await cloudinary.v2.uploader.destroy(public_id);
+
+        res.json('Imagen eliminada');
     }
 
 }
