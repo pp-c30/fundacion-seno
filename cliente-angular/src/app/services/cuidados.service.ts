@@ -20,6 +20,7 @@ export class CuidadosService {
   saveCuidados(unCuidados:ICuidados,files:FileList){
     const fd = new FormData();
 
+    fd.append('titulo',unCuidados.titulo);
     fd.append('descripcion',unCuidados.descripcion);
 
     for (let index = 0; index < files.length; index++) {

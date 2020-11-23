@@ -51,7 +51,8 @@ class CuidadosController {
             if (!req.files) {
                 let unCuidado = req.body;
                 const updateCuidado = {
-                    descripcion: req.body.descripcion
+                    descripcion: req.body.descripcion,
+                    titulo: req.body.titulo
                 };
                 const db = yield database_1.conexion();
                 yield db.query('update cuidados set ? where id_cuidados =?', [updateCuidado, req.body.id_cuidados]);
@@ -70,9 +71,11 @@ class CuidadosController {
         return __awaiter(this, void 0, void 0, function* () {
             const files = req.files;
             const des = req.body.descripcion;
+            const ti = req.body.titulo;
             const db = yield database_1.conexion();
             const unCuidado = {
-                descripcion: des
+                descripcion: des,
+                titulo: ti
             };
             const resultado = yield db.query('insert into cuidados set? ', [unCuidado]);
             for (let i = 0; i < files.length; i++) {

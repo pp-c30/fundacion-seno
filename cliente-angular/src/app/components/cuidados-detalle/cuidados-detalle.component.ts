@@ -11,6 +11,7 @@ import { CuidadosService } from "../../services/cuidados.service";
 export class CuidadosDetalleComponent implements OnInit {
   id_cuidados:number;
   descripcion:string;
+  titulo:string;
  
   lista_imagenes:any = [];
 
@@ -20,6 +21,7 @@ export class CuidadosDetalleComponent implements OnInit {
     this.activeRoute.queryParams.subscribe(
       params => {
         this.id_cuidados = params.id_cuidados;
+        this.titulo = params.titulo;
         this.descripcion = params.descripcion;
       }
     );

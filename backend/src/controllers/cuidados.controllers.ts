@@ -53,7 +53,8 @@ export class CuidadosController
             let unCuidado = req.body;
             
             const updateCuidado ={
-                descripcion:req.body.descripcion
+                descripcion:req.body.descripcion,
+                titulo:req.body.titulo
             }
             const db = await conexion();
 
@@ -79,11 +80,13 @@ export class CuidadosController
        const files:any = req.files;
     
        const des = req.body.descripcion; 
-     
+       const ti = req.body.titulo; 
+
        const db = await conexion();
        const unCuidado = {    
            
-           descripcion:des
+           descripcion:des,
+           titulo:ti
          
        }
        const resultado = await db.query ('insert into cuidados set? ',[unCuidado]);

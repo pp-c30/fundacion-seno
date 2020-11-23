@@ -33,6 +33,7 @@ export class AdminCuidadosComponent implements OnInit {
     this.formCuidados = this.fb.group({
       id_cuidados:[null],
       descripcion:['',[Validators.required, Validators.minLength(4)]],
+      titulo:['',[Validators.required, Validators.minLength(4)]],
       archivos:['']
     })
    }
@@ -86,6 +87,7 @@ export class AdminCuidadosComponent implements OnInit {
     this.formCuidados.setValue({
       id_cuidados:cuidados.id_cuidados,
       descripcion:cuidados.descripcion,
+      titulo:cuidados.titulo,
       archivos:''
     });
   }
@@ -96,6 +98,7 @@ export class AdminCuidadosComponent implements OnInit {
     this.formCuidados.setValue({
       id_cuidados:null,
       descripcion:'',
+      titulo:'',
       archivos:''
     });
   }

@@ -13,6 +13,7 @@
             <thead>
                 <tr>
                     <th>ID</th>
+                    <th>Titulo</th>
                     <th>Descripcion</th>
                     <th>Operaciones</th>
                 </tr>
@@ -20,7 +21,9 @@
             <tbody>
                 <tr *ngFor="let cuidado of listCuidados | filter:buscarCuidados | paginate:{itemsPerPage:5, currentPage:p}">
                     <td>{{cuidado.id_cuidados}}</td>
+                    <td>{{cuidado.titulo}}</td>
                     <td>{{cuidado.descripcion}}</td>
+                    
                   
                     <td>
                         <div class="btn-group">
@@ -54,6 +57,14 @@
                     <form [formGroup]="formCuidados" (ngSubmit)="guardarCuidados()">
                         <div class="form-group" >
                             <input formControlName="id_cuidados" type="hidden"class="form-control" >
+                        </div>
+
+                        <div class="form-group">
+                            <input  [ngClass]="{'is-invalid': (formCuidados.get('titulo')?.touched || formCuidados.get('titulo')?.dirty) && formCuidados.get('titulo')?.invalid }" formControlName="titulo"placeholder="Ingrese titulo del cuidado" type="text" class="form-control">
+                            <div class="invalid-feedback">
+                                <span *ngIf="formCuidados.get('titulo').hasError('required')">Campo requerido / </span>
+                                <span *ngIf="!formCuidados.get('titulo').hasError('minLength')">Minimo de 4 caracteres</span>
+                            </div>
                         </div>
     
                         <div class="form-group">
