@@ -39,7 +39,7 @@ class QuienesController {
             const conex = yield database_1.conexion();
             let id_qs = req.params.id;
             let nueva_e = req.body;
-            yield conex.query('update quienes_somos set ? where id_qs', [id_qs, nueva_e]);
+            yield conex.query('update quienes_somos set ? where id_qs = ?', [nueva_e, id_qs]);
             return res.json('Elemento Actualizado con exito');
         });
     }

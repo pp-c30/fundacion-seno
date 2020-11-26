@@ -42,7 +42,7 @@ export class   QuienesController
 
         let nueva_e = req.body;
 
-        await conex.query('update quienes_somos set ? where id_qs',[id_qs, nueva_e]);
+        await conex.query('update quienes_somos set ? where id_qs = ?',[nueva_e, id_qs]);
 
         return res.json('Elemento Actualizado con exito')
     }
@@ -56,4 +56,5 @@ export class   QuienesController
 
         return res.json(nueva_e[0]);
     }
+
 }

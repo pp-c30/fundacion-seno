@@ -7,10 +7,8 @@ import { CategoriaDonacionesComponent } from "./components/categoria-donaciones/
 import { CategoriaGaleriaComponent } from "./components/categoria-galeria/categoria-galeria.component";
 import { DonacionesComponent } from './components/donaciones/donaciones.component'
 import { CategoriaEventoComponent } from "./components/categoria-evento/categoria-evento.component";
-
 import { AdminGaleriaComponent } from "./components/admin-galeria/admin-galeria.component";
 import { AdminDetalleGaleriaComponent } from "src/app/components/admin-detalle-galeria/admin-detalle-galeria.component";
-
 import { AdminDetalleEventoComponent } from './components/admin-detalle-evento/admin-detalle-evento.component';
 import { AdminEventoComponent } from "./components/admin-evento/admin-evento.component";
 import { EventosComponent } from "./components/eventos/eventos.component";
@@ -19,6 +17,7 @@ import { AdminCuidadosComponent } from "./components/admin-cuidados/admin-cuidad
 import { AdminDetalleCuidadosComponent } from "./components/admin-detalle-cuidados/admin-detalle-cuidados.component";
 import { CuidadosComponent } from "./components/cuidados/cuidados.component";
 import { CuidadosDetalleComponent } from "./components/cuidados-detalle/cuidados-detalle.component";
+import { QuienesComponent } from "./components/quienes/quienes.component";
 
 
 const routes: Routes = [
@@ -37,11 +36,15 @@ const routes: Routes = [
     path:"eventos",component:EventosComponent,
   },
   {
+    path:"quienes",component:QuienesComponent,
+  },
+  {
     path:"admin-detalle-evento/:id_evento",component:AdminDetalleEventoComponent,
   },
   {
     path:"admin-evento",component:AdminEventoComponent,
   },
+ 
   {
     path:"cuidados-detalle",component:CuidadosDetalleComponent,
   },

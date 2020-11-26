@@ -37,6 +37,8 @@ import { CuidadosDetalleComponent } from './components/cuidados-detalle/cuidados
 import { AdminDetalleCuidadosComponent } from './components/admin-detalle-cuidados/admin-detalle-cuidados.component';
 import { AdminCuidadosComponent } from './components/admin-cuidados/admin-cuidados.component';
 
+import { QuienesComponent } from './components/quienes/quienes.component';
+
 
 
 @NgModule({
@@ -60,7 +62,8 @@ import { AdminCuidadosComponent } from './components/admin-cuidados/admin-cuidad
     CuidadosComponent,
     CuidadosDetalleComponent,
     AdminDetalleCuidadosComponent,
-    AdminCuidadosComponent
+    AdminCuidadosComponent,
+    QuienesComponent
 
 
    
