@@ -10,6 +10,7 @@ import { IGaleria } from "src/app/models/galeria";
 })
 export class GaleriaComponent implements OnInit {
   lista_galeria:IGaleria[] = [];
+  anio = new Date().getFullYear();
 
   constructor(private galeriaServ:GaleriaService, private router:Router) { }
 

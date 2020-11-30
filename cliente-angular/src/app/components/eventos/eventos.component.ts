@@ -11,6 +11,7 @@ import { Router,NavigationExtras } from "@angular/router";
 export class EventosComponent implements OnInit {
 
   lista_eventos:IEvento[] = [];
+  anio = new Date().getFullYear();
 
   constructor(private eventoServ:EventoService, private router:Router)
   {

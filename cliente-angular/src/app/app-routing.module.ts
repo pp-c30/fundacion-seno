@@ -20,6 +20,7 @@ import { CuidadosDetalleComponent } from "./components/cuidados-detalle/cuidados
 import { QuienesComponent } from "./components/quienes/quienes.component";
 import { GaleriaComponent } from "./components/galeria/galeria.component";
 import { GaleriaDetalleComponent } from "./components/galeria-detalle/galeria-detalle.component";
+import { QuienesSomosComponent} from "./components/quienes-somos/quienes-somos.component";
 
 
 const routes: Routes = [
@@ -45,6 +46,9 @@ const routes: Routes = [
   },
   {
     path:"quienes",component:QuienesComponent,
+  },
+  {
+    path:"quienes-somos",component:QuienesSomosComponent,
   },
   {
     path:"admin-detalle-evento/:id_evento",component:AdminDetalleEventoComponent,

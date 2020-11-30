@@ -13,6 +13,7 @@ import { IconOptions } from '@angular/material/icon';
 })
 export class CuidadosComponent implements OnInit {
   lista_cuidados:ICuidados[] = [];
+  anio = new Date().getFullYear();
 
   constructor(private cuidadosServ:CuidadosService, private router:Router) { }
 
