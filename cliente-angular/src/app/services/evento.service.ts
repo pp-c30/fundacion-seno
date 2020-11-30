@@ -60,7 +60,7 @@ export class EventoService {
   
   deleteImageEvento(id_img_evento:number, public_id:string)
   {
-    return this.http.delete('http://localhost:3000/detalles-imagen-evento/'+id_img_evento+'/'+public_id)
+    return this.http.delete('http://localhost:3000/detalles-imagen-evento/'+id_img_evento+'/'+public_id);
   }
 
   deleteEvento(id_evento:number)

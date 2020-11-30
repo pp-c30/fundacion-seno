@@ -38,6 +38,8 @@ import { AdminDetalleCuidadosComponent } from './components/admin-detalle-cuidad
 import { AdminCuidadosComponent } from './components/admin-cuidados/admin-cuidados.component';
 
 import { QuienesComponent } from './components/quienes/quienes.component';
+import { GaleriaComponent } from './components/galeria/galeria.component';
+import { GaleriaDetalleComponent } from './components/galeria-detalle/galeria-detalle.component';
 
 
 
@@ -63,7 +65,9 @@ import { QuienesComponent } from './components/quienes/quienes.component';
     CuidadosDetalleComponent,
     AdminDetalleCuidadosComponent,
     AdminCuidadosComponent,
-    QuienesComponent
+    QuienesComponent,
+    GaleriaComponent,
+    GaleriaDetalleComponent
 
 
    

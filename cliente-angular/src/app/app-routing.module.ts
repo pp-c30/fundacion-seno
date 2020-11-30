@@ -18,6 +18,8 @@ import { AdminDetalleCuidadosComponent } from "./components/admin-detalle-cuidad
 import { CuidadosComponent } from "./components/cuidados/cuidados.component";
 import { CuidadosDetalleComponent } from "./components/cuidados-detalle/cuidados-detalle.component";
 import { QuienesComponent } from "./components/quienes/quienes.component";
+import { GaleriaComponent } from "./components/galeria/galeria.component";
+import { GaleriaDetalleComponent } from "./components/galeria-detalle/galeria-detalle.component";
 
 
 const routes: Routes = [
@@ -34,6 +36,12 @@ const routes: Routes = [
   },
   {
     path:"eventos",component:EventosComponent,
+  },
+  {
+    path:"galeria-detalle",component:GaleriaDetalleComponent,
+  },
+  {
+    path:"galeria",component:GaleriaComponent,
   },
   {
     path:"quienes",component:QuienesComponent,

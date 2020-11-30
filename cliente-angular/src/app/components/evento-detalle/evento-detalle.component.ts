@@ -12,7 +12,6 @@ export class EventoDetalleComponent implements OnInit {
  id_evento:number;
  titulo:string;
  descripcion:string;
-
  lista_imagenes:any = [];
 
   constructor(private activeRoute:ActivatedRoute,private eventoServ:EventoService) 

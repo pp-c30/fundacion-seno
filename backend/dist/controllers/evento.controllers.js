@@ -110,6 +110,19 @@ class EventoController {
             res.json('se inserto exitosamente');
         });
     }
+    eliminarEvento(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const db = yield database_1.conexion();
+            let id_evento = req.params.id_evento;
+            yield db.query('delete from eventos where id_evento = ?', [id_evento]);
+            let lista_imagenes_evento = yield db.query('select * from img_evento where id_evento = ?', [id_evento]);
+            for (let index = 0; index < lista_imagenes_evento.length; index++) {
+                yield cloudinary_1.default.v2.uploader.destroy(lista_imagenes_evento[index].public_id);
+            }
+            yield db.query('delete from img_evento where id_evento =?', [id_evento]);
+            res.json('Se elimino completamente el evento');
+        });
+    }
     listarImagenesEvento(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             let id_evento = req.params.id_evento;
@@ -145,19 +158,6 @@ class EventoController {
             yield db.query('delete from img_evento where id_img_evento = ?', [id_img_evento]);
             yield cloudinary_1.default.v2.uploader.destroy(public_id);
             res.json('Se elimino exitosamente');
-        });
-    }
-    eliminarEvento(req, res) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const db = yield database_1.conexion();
-            let id_evento = req.params.id_evento;
-            yield db.query('delete from eventos where id_evento = ?', [id_evento]);
-            let lista_imagenes_evento = yield db.query('select * from img_evento where id_evento = ?', [id_evento]);
-            for (let index = 0; index < lista_imagenes_evento.length; index++) {
-                yield cloudinary_1.default.v2.uploader.destroy(lista_imagenes_evento[index].public_id);
-            }
-            yield db.query('delete from img_evento where id_evento =?', [id_evento]);
-            res.json('Se elimino completamente el evento');
         });
     }
 }

@@ -1,4 +1,3 @@
-
 import { conexion } from "../database";
 import { Request, Response } from "express";
 import { IEvento } from "../models/evento";
@@ -127,6 +126,26 @@ export class EventoController
         res.json('se inserto exitosamente');
     }
 
+    public async eliminarEvento(req:Request, res:Response)
+    {
+        const db = await conexion();
+
+        let id_evento = req.params.id_evento;
+
+        await db.query('delete from eventos where id_evento = ?',[id_evento]);
+
+        let lista_imagenes_evento = await db.query('select * from img_evento where id_evento = ?',[id_evento]);
+
+        for (let index = 0; index < lista_imagenes_evento.length; index++) {
+            await cloudinary.v2.uploader.destroy(lista_imagenes_evento[index].public_id);        
+        }
+
+        await db.query('delete from img_evento where id_evento =?',[id_evento]);
+        
+        res.json('Se elimino completamente el evento');
+          
+    }
+
     public async listarImagenesEvento(req:Request, res:Response)
     {
         let id_evento = req.params.id_evento;
@@ -177,25 +196,5 @@ export class EventoController
         await cloudinary.v2.uploader.destroy(public_id);
  
         res.json('Se elimino exitosamente');
-    }
-
-    public async eliminarEvento(req:Request, res:Response)
-    {
-        const db = await conexion();
-
-        let id_evento = req.params.id_evento;
-
-        await db.query('delete from eventos where id_evento = ?',[id_evento]);
-
-        let lista_imagenes_evento = await db.query('select * from img_evento where id_evento = ?',[id_evento]);
-
-        for (let index = 0; index < lista_imagenes_evento.length; index++) {
-            await cloudinary.v2.uploader.destroy(lista_imagenes_evento[index].public_id);        
-        }
-
-        await db.query('delete from img_evento where id_evento =?',[id_evento]);
-        
-        res.json('Se elimino completamente el evento');
-          
     }
 }

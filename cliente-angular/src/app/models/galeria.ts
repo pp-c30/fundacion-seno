@@ -1,9 +1,9 @@
 export interface IGaleria {
-    id_galeria?:number,
-    descripcion:string,
+    id_galeria?:number;
+    descripcion:string;
     fecha:string;
-    localidad:number,
-    categoria:number,
-    tipo:number,
-    estado_home:number
+    localidad:any;
+    categoria:any;
+    tipo:any;
+    estado_home:any;
 }

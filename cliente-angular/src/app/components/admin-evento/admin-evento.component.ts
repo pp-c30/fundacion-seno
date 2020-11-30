@@ -126,7 +126,6 @@ export class AdminEventoComponent implements OnInit {
     });
   }
 
-
   eliminarEvento(id_evento:number)
   {
     if(confirm('Estas seguro que quieres eliminar este evento?'))

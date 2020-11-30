@@ -37,11 +37,10 @@ export class AdminDetalleGaleriaComponent implements OnInit {
       }
     );
 
-      this.listarImagenGaleria(this.id_galeria);
-
+      this.listarImagenesGaleria(this.id_galeria);
   }
 
-  listarImagenGaleria(id_galeria:number)
+  listarImagenesGaleria(id_galeria:number)
     {
       this.galeriaServ.getImageGaleria(id_galeria).subscribe(
         resultado =>{
@@ -51,7 +50,7 @@ export class AdminDetalleGaleriaComponent implements OnInit {
       )
     }
 
-  mostrarImagenSeleccionada(galeria:IHtmlInputEvent)
+  mostrarImagenesSeleccionadas(galeria:IHtmlInputEvent)
   {
     this.archivos = galeria.target.files;
     if(this.archivos)
@@ -66,30 +65,44 @@ export class AdminDetalleGaleriaComponent implements OnInit {
     }
   }
 
-  agregarImagenSeleccionada()
+  agregarImagenesGaleria()
   {
+    this.spinner.show();
     this.galeriaServ.addImageGaleria(this.id_galeria, this.archivos).subscribe(
       resultado =>{
-        this.imagenes_leidas = [];
         this.formDetalleGaleria.reset();
-        this.listarImagenGaleria(this.id_galeria)
-        
+        this.listarImagenesGaleria(this.id_galeria);
+        this.imagenes_leidas = [];
+        this.spinner.hide();
       },
       error => console.log(error)
     )
   }
 
-  eliminarImagenSeleccionada(id_img_galeria:number, public_id:string)
+  eliminarImagenGaleria(id_img_galeria:number, public_id:string)
   {
+    this.spinner.show();
     if(confirm('Esta Seguro de eliminar la imagen?')){
-      
       this.galeriaServ.deleteImageGaleria(id_img_galeria, public_id).subscribe(
         resultado => {
           console.log(resultado);
-          this.listarImagenGaleria(this.id_galeria);
-        }
+          this.listarImagenesGaleria(this.id_galeria);
+          this.spinner.hide();
+          
+        },
+        
       );
     }
     
+  }
+  establecerPortada(id_img_galeria:number,id_galeria:number)
+  {
+    this.galeriaServ.assingPortada(id_img_galeria,id_galeria).subscribe(
+      resultado => {
+        //refrescamos la grilla
+        this.listarImagenesGaleria(this.id_galeria);
+      }
+    );
+
   }
 }

@@ -86,7 +86,7 @@ export class AdminDetalleEventoComponent implements OnInit {
     if(confirm('Esta seguro que quiere eliminar esta imagen?')){
       this.eventoServ.deleteImageEvento(id_img_evento,public_id).subscribe(
         resultado => {
-          console.log('resultado');
+          console.log(resultado);
           this.listarImagenesEvento(this.id_evento);
           this.spinner.hide();
         }

@@ -63,13 +63,15 @@
                                 <span *ngIf="!formDonacion.get('titulo').hasError('minLength')">Minimo de 4 caracteres</span>
                             </div>
                         </div>
+
                         <div class="form-group">
-                            <input [ngClass]="{'is-invalid': (formDonacion.get('descripcion')?.touched || formDonacion.get('descripcion')?.dirty) && formDonacion.get('descripcion')?.invalid }" formControlName="descripcion" placeholder="Ingrese una descripcion" type="text"class="form-control">
+                            <textarea [ngClass]="{'is-invalid': (formDonacion.get('descripcion')?.touched || formDonacion.get('descripcion')?.dirty) && formDonacion.get('descripcion')?.invalid }" formControlName="descripcion" placeholder="Ingrese una descripcion" class="form-control" name="descripcion"  cols="30" rows="4"></textarea>
                             <div class="invalid-feedback">
                                 <span *ngIf="formDonacion.get('descripcion').hasError('required')">Campo requerido / </span>
                                 <span *ngIf="!formDonacion.get('descripcion').hasError('minLength')">Minimo de 4 caracteres</span>
                             </div>
                         </div>
+
                         <div class="form-group">
                             <select class="form-control" id="exampleFormControlSelect1" [ngClass]="{'is-invalid': (formDonacion.get('categoria')?.touched || formDonacion.get('categoria')?.dirty) && formDonacion.get('categoria')?.invalid}" formControlName="categoria">
                                 <option value="" disabled >Seleccione una Categoria</option>
@@ -100,8 +102,3 @@
         </div>
     </div>
 </div>                        
-                    
-               
-  
-   
-
