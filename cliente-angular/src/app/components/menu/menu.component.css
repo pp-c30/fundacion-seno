@@ -14,7 +14,7 @@
 
 .mat-toolbar.mat-primary {
   height: 15%;
-  
+  background-image: linear-gradient(to right, #00a8a8, #0088ac, #0065a3, #353d84, #510651);
   margin: 0%;
 
   top: 1;
