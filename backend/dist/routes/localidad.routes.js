@@ -8,5 +8,5 @@ enrutadorLocalidad.route('/localidad').get(localidadController.listarLocalidad);
 enrutadorLocalidad.route('/localidad').post(localidadController.crearLocalidad);
 enrutadorLocalidad.route('/localidad/:id').delete(localidadController.eliminarLocalidad);
 enrutadorLocalidad.route('/localidad/:id').put(localidadController.actualizarLocalidad);
-enrutadorLocalidad.route('/localidad/:id').get(localidadController.obtenerLocalidad);
+enrutadorLocalidad.route('/localidades/:id').get(localidadController.listarLocalidades);
 exports.default = enrutadorLocalidad;

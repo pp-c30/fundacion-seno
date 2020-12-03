@@ -13,6 +13,6 @@ enrutadorLocalidad.route('/localidad/:id').delete(localidadController.eliminarLo
 
 enrutadorLocalidad.route('/localidad/:id').put(localidadController.actualizarLocalidad);
 
-enrutadorLocalidad.route('/localidad/:id').get(localidadController.obtenerLocalidad);
+enrutadorLocalidad.route('/localidades/:id').get(localidadController.listarLocalidades);
 
 export default enrutadorLocalidad;

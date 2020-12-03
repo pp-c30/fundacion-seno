@@ -10,11 +10,15 @@ export class LocalidadService {
   constructor(private http:HttpClient) { 
 
   }
+  getLocalidades(id_provincia:number)
+  {
+    return this.http.get<ILocalidad[]>('http://localhost:3000/localidades/'+id_provincia);
+  }
+
   getLocalidad()
   {
     return this.http.get<ILocalidad[]>('http://localhost:3000/localidad');
   }
-
   saveLocalidad(unaLocalidad:ILocalidad)
   {
     return this.http.post('http://localhost:3000/localidad',unaLocalidad);

@@ -1,6 +1,9 @@
 <br>
 <div class="container-fluid">
 <div class="row">
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+        Nuevo
+      </button>
     <div class="col-lg-12">
         <div class="row">
             <div class="col-sm-4">
@@ -26,7 +29,7 @@
         <tbody>
             <tr *ngFor="let galeria of listGaleria | filter:buscarGaleria | paginate:{itemsPerPage:5, currentPage:p}">
                 <td>{{galeria.id_galeria}}</td>
-                <td>{{galeria.descripcion}}</td>
+                <td [innerHtml]="galeria.descripcion"></td>
                 <td>{{galeria.fecha}}</td>
                 <td>{{galeria.localidad}}</td>
                 <td>{{galeria.categoria}}</td>
@@ -37,7 +40,7 @@
                         <button (click)="eliminarGaleria(galeria.id_galeria)" mat-icon-button class="icon delete-icon btn btn-danger" aria-label="">
                             <mat-icon>delete</mat-icon>
                         </button>
-                        <button (click)="editarGaleria(galeria)" mat-icon-button class="icon create-icon btn btn-primary" aria-label="">
+                        <button (click)="editarGaleria(galeria)" mat-icon-button class="icon create-icon btn btn-primary" aria-label="" data-toggle="modal" data-target="#exampleModal">
                             <mat-icon>create</mat-icon>
                         </button>
                         <button (click)="detalleGaleria(galeria.id_galeria)" mat-icon-button class="icon more-icon btn btn-success">
@@ -55,73 +58,7 @@
         </div>
     </div>
 
-    <div class="col-lg-6">
-        <div class="card">
-            <div class="card-header">
-                Formulario de Galeria
-
-            </div>
-            <div class="card-body">
-                <form [formGroup]="formGaleria" (ngSubmit)="guardarGaleria()">
-                    <div class="form-group" >
-                        <input formControlName="id_galeria" type="hidden"class="form-control" >
-                    </div>
-
-                    <div class="form-group">
-                        <textarea [ngClass]="{'is-invalid': (formGaleria.get('descripcion')?.touched || formGaleria.get('descripcion')?.dirty) && formGaleria.get('descripcion')?.invalid }" formControlName="descripcion" placeholder="Ingrese una descripcion" class="form-control" name="descripcion"  cols="30" rows="4"></textarea>
-                        <div class="invalid-feedback">
-                            <span *ngIf="formGaleria.get('descripcion').hasError('required')">Campo requerido / </span>
-                            <span *ngIf="!formGaleria.get('descripcion').hasError('minLength')">Minimo de 4 caracteres</span>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <input [ngClass]="{'is-invalid': (formGaleria.get('fecha')?.touched || formGaleria.get('fecha')?.dirty) && formGaleria.get('fecha')?.invalid }" formControlName="fecha" placeholder="Ingrese Fecha de la Imagen" type="date" class="form-control">
-                        <div class="invalid-feedback">
-                            <span *ngIf="formGaleria.get('fecha').hasError('required')">Campo requerido  </span>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <select class="form-control" id="exampleFormControlSelect1" [ngClass]="{'is-invalid': (formGaleria.get('localidad')?.touched || formGaleria.get('localidad')?.dirty) && formGaleria.get('localidad')?.invalid }" formControlName="localidad" > 
-                            <option value="" disabled >Seleccione una localidad</option>
-                            <option *ngFor="let localidad of listLocalidad" [value]="localidad.id_localidad"> {{localidad.nombre}}</option>
-                        </select>
-                        <div class="invalid-feedback">
-                            <span *ngIf="formGaleria.get('localidad').hasError('required')">Campo requerido  </span>  
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <select class="form-control" id="exampleFormControlSelect1" [ngClass]="{'is-invalid': (formGaleria.get('categoria')?.touched || formGaleria.get('categoria')?.dirty) && formGaleria.get('categoria')?.invalid }" formControlName="categoria" > 
-                            <option value="" disabled >Seleccione una Categoria</option>
-                            <option *ngFor="let categoria of listCategoG" [value]="categoria.id_categoria"> {{categoria.descripcion}}</option>
-                        </select>
-                        <div class="invalid-feedback">
-                            <span *ngIf="formGaleria.get('categoria').hasError('required')">Campo requerido  </span>  
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <input formControlName="tipo" placeholder="Ingrese tipo" type="text" name="" value="" class="form-control">
-                    </div>
-
-                    <div class="form-group">
-                        <input formControlName="estado_home" placeholder="Ingrese estado" type="text" name="" value="" class="form-control">
-                    </div>
-
-                    <div [style]="ocultar_boton_file"  class="form-group">
-                        <input (change)="mostrarImagenSeleccionada($event)" formControlName="archivos"  class="form-control-file" type="file" name="" id="" multiple>
-                    </div>
-
-                    <div class="btn-group">
-                        <button [disabled]="formGaleria.invalid" class="btn btn-success">Guardar imagen</button>
-                        <button type="button" (click)="vaciarForm()" class="btn btn-primary">Vaciar</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
+    
     <br>
         <div class="col-6">
             <div [style]="ocultar_boton_file" id="carouselExampleControls" class="carousel slide" data-ride="carousel">
@@ -146,4 +83,101 @@
     </div>
 </div>
 
+
+
+
+
 <ngx-spinner style="color: white;">Cargando</ngx-spinner>
+
+
+
+
+
+
+
+
+  <div class="modal fade " id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="false" style="background-color: rgba(0, 0, 0, 0.5);" >
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form [formGroup]="formGaleria" (ngSubmit)="guardarGaleria()">
+        <div class="modal-body">
+            
+                <div class="form-group" >
+                    <input formControlName="id_galeria" type="hidden"class="form-control" >
+                </div>
+
+                <div class="form-group">
+                    <angular-editor formControlName="descripcion" [config]="editorConfig" [ngClass]="{'is-invalid': (formGaleria.get('descripcion')?.touched || formGaleria.get('descripcion')?.dirty) && formGaleria.get('descripcion')?.invalid }" ></angular-editor>
+                    <div class="invalid-feedback">
+                        <span *ngIf="formGaleria.get('descripcion').hasError('required')">Campo requerido / </span>
+                        <span *ngIf="!formGaleria.get('descripcion').hasError('minLength')">Minimo de 4 caracteres</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <input [ngClass]="{'is-invalid': (formGaleria.get('fecha')?.touched || formGaleria.get('fecha')?.dirty) && formGaleria.get('fecha')?.invalid }" formControlName="fecha" placeholder="Ingrese Fecha de la Imagen" type="date" class="form-control">
+                    <div class="invalid-feedback">
+                        <span *ngIf="formGaleria.get('fecha').hasError('required')">Campo requerido  </span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <select (change)="obtenerLocalidades($event.target.value)" formControlName="provincia" class="form-control" [ngClass]="{'is-invalid': (formGaleria.get('provincia')?.touched || formGaleria.get('provincia')?.dirty) && formGaleria.get('provincia')?.invalid }">
+                        <option value="0" disabled >Seleccione una provincia</option>
+                        <option *ngFor="let provincia of listProvincia" [value]="provincia.id_provincia" >{{provincia.descripcion}}</option>
+                    </select>
+                    <div class="invalid-feedback">
+                        <span *ngIf="formGaleria.get('provincia').hasError('required')">Campo requerido  </span>  
+                    </div>
+                </div>
+
+                <div *ngIf="listLocalidad?.length > 0" class="form-group">
+                    <select class="form-control"  [ngClass]="{'is-invalid': (formGaleria.get('localidad')?.touched || formGaleria.get('localidad')?.dirty) && formGaleria.get('localidad')?.invalid }" formControlName="localidad" > 
+                        <option value="0" disabled >Seleccione una localidad</option>
+                        <option *ngFor="let localidad of listLocalidad" [value]="localidad.id_localidad"> {{localidad.nombre}}</option>
+                    </select>
+                    <div class="invalid-feedback">
+                        <span *ngIf="formGaleria.get('localidad').hasError('required')">Campo requerido  </span>  
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <select class="form-control" id="exampleFormControlSelect1" [ngClass]="{'is-invalid': (formGaleria.get('categoria')?.touched || formGaleria.get('categoria')?.dirty) && formGaleria.get('categoria')?.invalid }" formControlName="categoria" > 
+                        <option value="" disabled >Seleccione una Categoria</option>
+                        <option *ngFor="let categoria of listCategoG" [value]="categoria.id_categoria"> {{categoria.descripcion}}</option>
+                    </select>
+                    <div class="invalid-feedback">
+                        <span *ngIf="formGaleria.get('categoria').hasError('required')">Campo requerido  </span>  
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <input formControlName="tipo" placeholder="Ingrese tipo" type="text" name="" value="" class="form-control">
+                </div>
+
+                <div class="form-group">
+                    <input formControlName="estado_home" placeholder="Ingrese estado" type="text" name="" value="" class="form-control">
+                </div>
+
+                <div [style]="ocultar_boton_file"  class="form-group">
+                    <input (change)="mostrarImagenSeleccionada($event)" formControlName="archivos"  class="form-control-file" type="file" name="" id="" multiple>
+                </div>
+            
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <div class="btn-group">
+            <button [disabled]="formGaleria.invalid" class="btn btn-success">Guardar imagen</button>
+            <button type="button" (click)="vaciarForm()" class="btn btn-primary">Vaciar</button>
+        </div>
+        </div>
+    </form>
+      </div>
+    </div>
+  </div>

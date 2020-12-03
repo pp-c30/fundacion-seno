@@ -48,12 +48,12 @@ class LocalidadController {
             return res.json('Localidad Actualizada');
         });
     }
-    obtenerLocalidad(req, res) {
+    listarLocalidades(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const conex = yield database_1.conexion();
-            let id_localidad = req.params.id;
-            let unaLocalidad = yield conex.query("select * from localidad where id_localidad = ?", [id_localidad]);
-            return res.json(unaLocalidad[0]);
+            let id_provincia = req.params.id;
+            let localidad = yield conex.query('select * from localidad where provincia =?', [id_provincia]);
+            return res.json(localidad);
         });
     }
 }

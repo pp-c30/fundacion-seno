@@ -41,6 +41,8 @@ import { QuienesComponent } from './components/quienes/quienes.component';
 import { GaleriaComponent } from './components/galeria/galeria.component';
 import { GaleriaDetalleComponent } from './components/galeria-detalle/galeria-detalle.component';
 import { QuienesSomosComponent } from './components/quienes-somos/quienes-somos.component';
+import { AngularEditorComponent, AngularEditorModule } from "@kolkov/angular-editor";
+import { angularEditorConfig } from '@kolkov/angular-editor/lib/config';
 
 
 
@@ -91,7 +93,8 @@ import { QuienesSomosComponent } from './components/quienes-somos/quienes-somos.
     FormsModule,
     Ng2SearchPipeModule,
     NgxPaginationModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    AngularEditorModule
 
   ],
   providers: [],

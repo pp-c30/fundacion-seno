@@ -47,14 +47,14 @@ export class LocalidadController
         return res.json('Localidad Actualizada')
     }
 
-    public async obtenerLocalidad(req:Request, res:Response){
+    public async listarLocalidades(req:Request, res:Response){
         const conex = await conexion();
 
-        let id_localidad = req.params.id;
+        let id_provincia = req.params.id;
 
-        let unaLocalidad = await conex.query("select * from localidad where id_localidad = ?",[id_localidad])
+        let localidad = await conex.query('select * from localidad where provincia =?',[id_provincia] );
 
-        return res.json(unaLocalidad[0])
-
+        return res.json(localidad);
     }
+
 }

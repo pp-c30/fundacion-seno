@@ -10,7 +10,10 @@ import { IHtmlInputEvent } from "src/app/models/inputElement";
 import { NgxSpinnerService } from "ngx-spinner";
 import { Router } from "@angular/router";
 import { $ } from 'protractor';
-
+import { ProvinciaService } from "../../services/provincia.service";
+import { IProvincia } from "../../models/provincia";
+import { AngularEditorConfig } from '@kolkov/angular-editor';
+ 
 
 @Component({
   selector: 'app-admin-galeria',
@@ -18,11 +21,60 @@ import { $ } from 'protractor';
   styleUrls: ['./admin-galeria.component.css']
 })
 export class AdminGaleriaComponent implements OnInit {
+
+  editorConfig: AngularEditorConfig = {
+    editable: true,
+      spellcheck: true,
+      height: 'auto',
+      minHeight: '0',
+      maxHeight: 'auto',
+      width: 'auto',
+      minWidth: '0',
+      translate: 'yes',
+      enableToolbar: true,
+      showToolbar: true,
+      placeholder: 'Ingrese una descripcion',
+      defaultParagraphSeparator: '',
+      defaultFontName: '',
+      defaultFontSize: '',
+      fonts: [
+        {class: 'arial', name: 'Arial'},
+        {class: 'times-new-roman', name: 'Times New Roman'},
+        {class: 'calibri', name: 'Calibri'},
+        {class: 'comic-sans-ms', name: 'Comic Sans MS'}
+      ],
+      customClasses: [
+      {
+        name: 'quote',
+        class: 'quote',
+      },
+      {
+        name: 'redText',
+        class: 'redText'
+      },
+      {
+        name: 'titleText',
+        class: 'titleText',
+        tag: 'h1',
+      },
+    ],
+    uploadUrl: 'v1/image',
+    uploadWithCredentials: false,
+    sanitize: true,
+    toolbarPosition: 'top',
+    toolbarHiddenButtons: [
+      ['italic'],
+      
+    ]
+};
+
   listLocalidad:ILocalidad[] = [];
 
   listCategoG:ICategoria[] = [];
 
   listGaleria:IGaleria[] = [];
+
+  listProvincia:IProvincia[] = [];
 
   formGaleria:FormGroup;
 
@@ -36,13 +88,14 @@ export class AdminGaleriaComponent implements OnInit {
 
   ocultar_boton_file:any = 'display:block';
 
-  constructor(private router:Router, private galeriaServ:GaleriaService, private spinner: NgxSpinnerService, private fb: FormBuilder, private localidadServ:LocalidadService, private categoriaServ:CategoriaGaleriaService) { 
+  constructor(private router:Router, private galeriaServ:GaleriaService, private spinner: NgxSpinnerService, private fb: FormBuilder, private localidadServ:LocalidadService, private categoriaServ:CategoriaGaleriaService, private provinciaServ:ProvinciaService) { 
 
       this.formGaleria = this.fb.group({
         id_galeria:[null],
         descripcion:['',[Validators.required, Validators.minLength(4)]],
         fecha:['',[Validators.required]],
         localidad:['',[Validators.required]],
+        provincia:['',[Validators.required]],
         categoria:['',[Validators.required]],
         tipo:['',[Validators.required]],
         estado_home:['',[Validators.required]],
@@ -52,8 +105,8 @@ export class AdminGaleriaComponent implements OnInit {
 
   ngOnInit(): void {
     this.obtenerGaleria();
-    this.obtenerLocalidad();
     this.obtenerCategoria();
+    this.obtenerProvincias();
   }
   
   obtenerGaleria()
@@ -64,9 +117,9 @@ export class AdminGaleriaComponent implements OnInit {
     )
   }
 
-  obtenerLocalidad()
+  obtenerLocalidades(provincia:number)
   {
-    this.localidadServ.getLocalidad().subscribe(
+    this.localidadServ.getLocalidades(provincia).subscribe(
       respuesta =>{
         this.listLocalidad = respuesta;
       }
@@ -82,6 +135,16 @@ export class AdminGaleriaComponent implements OnInit {
     )
   }
 
+  obtenerProvincias()
+  {
+    this.provinciaServ.getProvincia().subscribe(
+      resultado => {
+        this.listProvincia = resultado;
+      },
+      error => console.log(error)
+    )
+  }
+
   guardarGaleria()
   {
     if (this.formGaleria.value.id_galeria)
@@ -90,8 +153,9 @@ export class AdminGaleriaComponent implements OnInit {
       this.galeriaServ.updateGaleria(this.formGaleria.value).subscribe(
         resultado =>{
             console.log(resultado);
-            this.obtenerGaleria();
+            
             this.formGaleria.reset();
+            this.obtenerGaleria();
             this.spinner.hide();
         },
         error => console.log(error)
@@ -103,8 +167,9 @@ export class AdminGaleriaComponent implements OnInit {
       resultado =>{
         console.log(resultado);
         this.imagenes_url =[];
-        this.obtenerGaleria();
+        
         this.formGaleria.reset();
+        this.obtenerGaleria();
         this.spinner.hide();
       },
       error => console.log(error)
@@ -119,6 +184,7 @@ export class AdminGaleriaComponent implements OnInit {
       id_galeria:galeria.id_galeria,
       descripcion:galeria.descripcion,
       fecha:galeria.fecha,
+      provincia:0,
       localidad:galeria.localidad,
       categoria:galeria.categoria,
       tipo:galeria.tipo,
@@ -134,7 +200,8 @@ export class AdminGaleriaComponent implements OnInit {
       id_galeria:null,
       descripcion:'',
       fecha:'',
-      localidad:'',
+      provincia:0,
+      localidad:0,
       categoria:'',
       tipo:'',
       estado_home:'',
