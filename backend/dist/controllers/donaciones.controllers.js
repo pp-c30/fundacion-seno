@@ -14,7 +14,7 @@ class DonacionesController {
     listarDonaciones(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const conex = yield database_1.conexion();
-            let donaciones = yield conex.query('select * from donaciones');
+            let donaciones = yield conex.query('select *,(select descripcion from categoria_donaciones where id_categoria_donaciones = d.categoria) as categoria from donaciones d');
             return res.json(donaciones);
         });
     }

@@ -76,7 +76,7 @@ export class EventoController
     {
         const db = await conexion();
 
-        let eventos = await db.query('select *,date_format(fecha_hora,"%d/%m/%Y %H:%i:%s") as fecha_hora  from eventos');
+        let eventos = await db.query('select *,date_format(fecha_hora,"%d/%m/%Y %H:%i:%s") as fecha_hora,(select descripcion from categoria_eventos where id_categoria_eventos = e.categoria) as categoria  from eventos e');
         
         res.json(eventos);
     }

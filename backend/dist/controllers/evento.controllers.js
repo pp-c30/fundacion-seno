@@ -69,7 +69,7 @@ class EventoController {
     listarEvento(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const db = yield database_1.conexion();
-            let eventos = yield db.query('select *,date_format(fecha_hora,"%d/%m/%Y %H:%i:%s") as fecha_hora  from eventos');
+            let eventos = yield db.query('select *,date_format(fecha_hora,"%d/%m/%Y %H:%i:%s") as fecha_hora,(select descripcion from categoria_eventos where id_categoria_eventos = e.categoria) as categoria  from eventos e');
             res.json(eventos);
         });
     }

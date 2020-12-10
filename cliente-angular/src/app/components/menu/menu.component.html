@@ -2,10 +2,10 @@
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav-content>
     <mat-toolbar color="primary">
-      <img src="assets/logo.jpg" width="10%" height="90%" alt="">
+      <img src="assets/logo.png" width="10%" height="100%" alt="">
       &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;  
         <div>
-          <a class="nav-link dropdown" href="" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="text-decoration: none; color:#ffffff;" class="lead">
+          <a class="nav-link dropdown" href="" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="text-decoration: none; color:#ffffff;" class="lead" *ngIf="autServ.verificarUsuarioLogueado()"> 
             Formularios
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink"   >
@@ -54,10 +54,19 @@
           </button>
 
          </a> &nbsp;&nbsp;&nbsp; &nbsp;
-         <a routerLink="   " style="text-decoration: none; color:#ffffff; " class="lead">
-          Donaciones
-         </a>
+        
+        <a href="https://mpago.la/1qHWtaJ" style="text-decoration: none; color:#ffffff; " class="lead" target="_blank">
+         Donaciones
+        </a>&nbsp;&nbsp;&nbsp; &nbsp;
 
+         <ng-container *ngIf="!autServ.verificarUsuarioLogueado();else cierresesion">
+          <a routerLink="registro" style="text-decoration: none; color:#ffffff; " class="lead">Registrarse</a>
+          &nbsp;&nbsp;&nbsp; &nbsp;
+           <a routerLink="ingreso" style="text-decoration: none; color:#ffffff; " class="lead">Ingresar</a>
+         </ng-container>
+         <ng-template #cierresesion>
+          <a (click)="autServ.cerrarSesion()" style="text-decoration: none; color:#ffffff; cursor: pointer;" class="lead">Salir</a>
+         </ng-template>
       </mat-toolbar>
     <ng-content></ng-content>
   </mat-sidenav-content>

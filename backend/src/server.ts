@@ -11,6 +11,7 @@ import enrutadorGaleria from "./routes/galeria.routes";
 import enrutadorLocalidad from "./routes/localidad.routes";
 import enrutadorProvincia from "./routes/provincia.routes";
 import enrutadorQuienes_somos from "./routes/quienes.routes";
+import enrutadorAut from "./routes/autenticacion.routes"
 import morgan from 'morgan';
 import cors from "cors";
 
@@ -44,6 +45,8 @@ export class Server{
         this.app.use(enrutadorCatgaleria);
 
         this.app.use(enrutadorCcuidados);
+        
+        this.app.use(enrutadorAut);
 
         this.app.use(enrutadorDonaciones);
 

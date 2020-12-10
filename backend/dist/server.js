@@ -25,6 +25,7 @@ const galeria_routes_1 = __importDefault(require("./routes/galeria.routes"));
 const localidad_routes_1 = __importDefault(require("./routes/localidad.routes"));
 const provincia_routes_1 = __importDefault(require("./routes/provincia.routes"));
 const quienes_routes_1 = __importDefault(require("./routes/quienes.routes"));
+const autenticacion_routes_1 = __importDefault(require("./routes/autenticacion.routes"));
 const morgan_1 = __importDefault(require("morgan"));
 const cors_1 = __importDefault(require("cors"));
 class Server {
@@ -44,6 +45,7 @@ class Server {
         this.app.use(cateventos_routes_1.default);
         this.app.use(catgaleria_routes_1.default);
         this.app.use(cuidados_routes_1.default);
+        this.app.use(autenticacion_routes_1.default);
         this.app.use(donaciones_routes_1.default);
         this.app.use(evento_routes_1.default);
         this.app.use(galeria_routes_1.default);

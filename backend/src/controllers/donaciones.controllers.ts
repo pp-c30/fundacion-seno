@@ -7,7 +7,7 @@ export class DonacionesController
     public async listarDonaciones(req:Request, res:Response){
         const conex = await conexion();
 
-        let donaciones = await conex.query('select * from donaciones');
+        let donaciones = await conex.query('select *,(select descripcion from categoria_donaciones where id_categoria_donaciones = d.categoria) as categoria from donaciones d');
 
         return res.json(donaciones);
     }

@@ -3,17 +3,15 @@
   <div class="row">
 
     <div *ngFor="let cuidados of lista_cuidados" class="col-lg-3">
-        <div class="card" style="width: 18rem;">
+        <div class="card" style="width: 17rem; border-radius: 15px; border-color: #0aa598bd;">
             <img style="height:180px" [src]="cuidados.imagen_portada" class="card-img-top" alt="...">
             <div class="card-body">
-              <h3 class="card-title">{{cuidados.titulo}}</h3>
+              <h3 class="card-title" [innerHtml]="cuidados.titulo"></h3>
              
-              <a type="button" class="btn btn-outline-primary" (click)="verMas(cuidados)">Ver mas</a>
+              <a type="button" class="btn btn-outline-info" (click)="verMas(cuidados)" >Ver mas</a>
             </div>
           </div>
     </div>
 </div>
+
 </div>
-<footer>
-  <i>Fundacion Seno</i>&nbsp;&nbsp;Copyright &copy;&nbsp; {{anio}}.&nbsp; Todos los derechos reservados
-</footer>

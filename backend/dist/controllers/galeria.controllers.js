@@ -67,7 +67,7 @@ class GaleriaController {
     listarGaleria(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const db = yield database_1.conexion();
-            let galeria = yield db.query('select *,date_format(fecha,"%d/%m/%Y ") as fecha  from galeria');
+            let galeria = yield db.query('select *,date_format(fecha,"%d/%m/%Y ") as fecha,(select nombre from localidad where id_localidad = g.localidad ) as localidad,(select descripcion from categoria_galeria where id_categoria =g.categoria) as categoria from galeria g');
             return res.json(galeria);
         });
     }

@@ -21,8 +21,9 @@ import { QuienesComponent } from "./components/quienes/quienes.component";
 import { GaleriaComponent } from "./components/galeria/galeria.component";
 import { GaleriaDetalleComponent } from "./components/galeria-detalle/galeria-detalle.component";
 import { QuienesSomosComponent} from "./components/quienes-somos/quienes-somos.component";
-
-
+import { IngresoComponent } from "./components/ingreso/ingreso.component";
+import { RegistroComponent } from "./components/registro/registro.component";
+import { AuthGuard } from "./auth.guard";
 const routes: Routes = [
   {
     path:"",
@@ -31,6 +32,13 @@ const routes: Routes = [
   },
   {
     path:"provincia",component:ProvinciaComponent,
+    canActivate:[AuthGuard]
+  },
+  {
+    path:"registro",component:RegistroComponent,
+  },
+  {
+    path:"ingreso",component:IngresoComponent,
   },
   {
     path:"evento-detalle",component:EventoDetalleComponent,

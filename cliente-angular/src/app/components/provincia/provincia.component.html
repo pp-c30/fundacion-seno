@@ -18,7 +18,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let provincia of listProvincias | filter:buscarProvincia | paginate:{itemsPerPage:3, currentPage:p}">
+                    <tr *ngFor="let provincia of listProvincias | filter:buscarProvincia | paginate:{itemsPerPage:5, currentPage:p}">
                         <td>{{provincia.id_provincia}}</td>
                         <td>{{provincia.descripcion}}</td>
                         <td>

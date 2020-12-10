@@ -1,12 +1,12 @@
 import { Router } from "express";
 import { ProvinciaController } from "../controllers/provincia.controllers";
-
+import { validarToken } from "../libs/verificarToken";
 
 const enrutadorProvincia = Router();
 
 let provinciaController = new ProvinciaController;
 
-enrutadorProvincia.route('/provincia').get(provinciaController.listarProvincia);
+enrutadorProvincia.route('/provincia').get(validarToken,provinciaController.listarProvincia);
 
 enrutadorProvincia.route('/provincia').post(provinciaController.crearProvincia);
 

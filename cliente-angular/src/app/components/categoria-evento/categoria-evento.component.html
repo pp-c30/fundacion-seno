@@ -19,7 +19,7 @@
                 </thead>
                 <tbody>
                     <tr *ngFor="let categoria of listCategoE | filter:buscarCategoE | paginate:{itemsPerPage:3, currentPage:p}">
-                        <td>{{categoria.id_provincia}}</td>
+                        <td>{{categoria.id_categoria_eventos}}</td>
                         <td>{{categoria.descripcion}}</td>
                         <td>
                             <div class="btn-group">
