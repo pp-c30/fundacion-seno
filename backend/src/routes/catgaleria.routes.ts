@@ -1,12 +1,12 @@
 import { Router } from "express";
 import { CatgaleriaController } from "../controllers/catgaleria.controllers";
-
+import { validarToken } from "../libs/verificarToken";
 const enrutadorCatgaleria = Router();
 
 let catgaleriaController = new CatgaleriaController();
 
 
-enrutadorCatgaleria.route('/categoria_galeria').get(catgaleriaController.listarCatgaleria);
+enrutadorCatgaleria.route('/categoria_galeria').get(validarToken,catgaleriaController.listarCatgaleria);
 
 enrutadorCatgaleria.route('/categoria_galeria').post(catgaleriaController.crearCatgaleria);
 

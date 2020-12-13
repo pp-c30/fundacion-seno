@@ -1,17 +1,4 @@
-footer{
-    bottom: 0;
-    background:white;
-    color:rgb(0, 0, 0);
-    height: 10%;
-    padding: 20px;
-    text-align: center;
-    width: 100%;
-}
-i{
-    
-    font-size:x-large;
-    font-weight: 800;
-}
+
 
 .col-lg-3 img{
     width: 100%;
@@ -23,3 +10,12 @@ i{
 
 
 
+b{
+    font-size:39px;
+  text-transform: inherit;
+  color: #5e00da;
+  text-shadow: 
+              
+              3px 8px 15px rgba(0,0,0,0.1),
+              3px 8px  5px rgba(0,0,0,0.3);
+  }

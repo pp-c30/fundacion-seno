@@ -1,9 +1,12 @@
 <br>
 <div class="container">
   <div class="row">
+    <b><i>Cuidados</i></b> 
+  </div><br><br>
+  <div class="row">
 
     <div *ngFor="let cuidados of lista_cuidados" class="col-lg-3">
-        <div class="card" style="width: 17rem; border-radius: 15px; border-color: #0aa598bd;">
+        <div class="card" style="width: 17rem; border-radius: 15px; border-color: #ff9100bd;">
             <img style="height:180px" [src]="cuidados.imagen_portada" class="card-img-top" alt="...">
             <div class="card-body">
               <h3 class="card-title" [innerHtml]="cuidados.titulo"></h3>

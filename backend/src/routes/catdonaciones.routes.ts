@@ -1,12 +1,12 @@
 import { Router } from "express";
 
 import { CatdonacionesController } from "../controllers/catdonaciones.controllers";
-
+import { validarToken } from "../libs/verificarToken";
 const enrutadorCatdon = Router();
 
 let catdonacionesController = new CatdonacionesController();
 
-enrutadorCatdon.route('/categoria_donaciones').get(catdonacionesController.listarCatdonaciones);
+enrutadorCatdon.route('/categoria_donaciones').get(validarToken,catdonacionesController.listarCatdonaciones);
 
 enrutadorCatdon.route('/categoria_donaciones').post(catdonacionesController.crearCatdonaciones);
 

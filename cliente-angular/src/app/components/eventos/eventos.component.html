@@ -1,9 +1,12 @@
 <br>
 <div class="container">
   <div class="row">
+    <b><i>Eventos</i></b> 
+  </div><br><br>
+  <div class="row">
 
     <div *ngFor="let evento of lista_eventos" class="col-lg-3">
-        <div class="card" style="width: 17rem;  border-radius: 15px; border-color: #0aa598bd;">
+        <div class="card" style="width: 17rem;  border-radius: 15px; border-color: #d600d6bd;">
             <img style="height:180px" [src]="evento.imagen_portada" class="card-img-top" alt="...">
             <div class="card-body">
               <h3 class="card-title">{{evento.titulo}}</h3>

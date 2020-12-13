@@ -2,6 +2,8 @@ import { Router } from "express";
 import { CuidadosController } from "../controllers/cuidados.controllers";
 import multer from "../libs/multer";
 import enrutadorEvento from "./evento.routes";
+import { validarToken } from "../libs/verificarToken";
+
 const enrutadorCcuidados = Router();
 
 let cuidadosController = new CuidadosController();
@@ -9,7 +11,7 @@ let cuidadosController = new CuidadosController();
 
 enrutadorCcuidados.route('/cuidados').post(multer.array('img_cuidados'),cuidadosController.guardarCuidados);
 
-enrutadorCcuidados.route('/cuidados').get(cuidadosController.listarCuidados);
+enrutadorCcuidados.route('/cuidados').get(validarToken,cuidadosController.listarCuidados);
 
 enrutadorCcuidados.route('/cuidados-imagenes/:id_cuidados').get(cuidadosController.listarImagenesCuidados);
 

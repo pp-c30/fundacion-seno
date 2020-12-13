@@ -1,12 +1,13 @@
 import { Router } from "express";
 
 import { CateventosController } from "../controllers/cateventos.controllers";
+import { validarToken } from "../libs/verificarToken";
 
 const enrutadorCateven = Router();
 
 let cateventosController = new CateventosController();
 
-enrutadorCateven.route('/categoria_eventos').get(cateventosController.listarCateventos);
+enrutadorCateven.route('/categoria_eventos').get(validarToken,cateventosController.listarCateventos);
 
 enrutadorCateven.route('/categoria_eventos').post(cateventosController.crearCateventos);
 

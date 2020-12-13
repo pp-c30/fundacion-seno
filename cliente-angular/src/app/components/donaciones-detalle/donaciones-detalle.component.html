@@ -1,0 +1,37 @@
+<br>
+<div align="center" >
+    <h1><i>Donaciones &nbsp;</i></h1>
+</div><br>
+
+<div class="container">
+    <div class="row">
+        <div *ngFor="let donaciones of listDonaciones; let i = index" class="col-lg-12">
+            <div *ngIf="donaciones.estado == 1 ">
+                <div class="col-lg-12">
+                    <div><hr>
+                        <b>{{donaciones.titulo}}</b><br><br>
+                        <h3 align="justify" [innerHtml]="donaciones.descripcion"></h3>
+                        <hr style="background: linear-gradient(to right, rgb(0, 197, 187),rgb(216, 0, 205));
+                        height: 1px;">
+                    </div> 
+                </div>
+            </div>
+        </div>
+    </div>
+    <br><br><br>
+    
+
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-5"></div>
+        <div class="col-lg-2">
+            <a type="button" class="btn btn-outline-success" href="https://mpago.la/1qHWtaJ" align="center"  target="_blank">
+                Donar
+            </a>
+        </div>
+    </div>
+</div>
+<br>
+
+

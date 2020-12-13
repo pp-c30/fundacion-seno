@@ -1,0 +1,10 @@
+b{
+    font-size:39px;
+  text-transform: uppercase;
+  color: #1ec626;
+  text-shadow: 0  2px  0   #238b15,
+               0  4px  0   #137c4b,
+            
+              3px 8px 15px rgba(0,0,0,0.1),
+              3px 8px  5px rgba(0,0,0,0.3);
+}

@@ -11,6 +11,7 @@ import { EventoService } from "../../services/evento.service";
 export class EventoDetalleComponent implements OnInit {
  id_evento:number;
  titulo:string;
+ fecha_hora:any;
  descripcion:string;
  lista_imagenes:any = [];
 
@@ -23,6 +24,7 @@ export class EventoDetalleComponent implements OnInit {
       params => {
         this.id_evento = params.id_evento;
         this.titulo = params.titulo;
+        this.fecha_hora = params.fecha_hora
         this.descripcion = params.descripcion;
       }
     );

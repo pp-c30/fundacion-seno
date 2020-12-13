@@ -1,11 +1,11 @@
 import { Router } from "express";
 import { LocalidadController } from "../controllers/localidad.controllers";
-
+import { validarToken } from "../libs/verificarToken";
 const enrutadorLocalidad = Router();
 
 let localidadController = new LocalidadController();
 
-enrutadorLocalidad.route('/localidad').get(localidadController.listarLocalidad);
+enrutadorLocalidad.route('/localidad').get(validarToken,localidadController.listarLocalidad);
 
 enrutadorLocalidad.route('/localidad').post(localidadController.crearLocalidad);
 

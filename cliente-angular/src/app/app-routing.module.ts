@@ -23,16 +23,26 @@ import { GaleriaDetalleComponent } from "./components/galeria-detalle/galeria-de
 import { QuienesSomosComponent} from "./components/quienes-somos/quienes-somos.component";
 import { IngresoComponent } from "./components/ingreso/ingreso.component";
 import { RegistroComponent } from "./components/registro/registro.component";
+import { HomeComponent } from "./components/home/home.component";
+import { DonacionesDetalleComponent } from "./components/donaciones-detalle/donaciones-detalle.component";
+
 import { AuthGuard } from "./auth.guard";
 const routes: Routes = [
   {
     path:"",
-    redirectTo:'/provincia',
+    redirectTo:'/home',
     pathMatch:'full'
   },
   {
     path:"provincia",component:ProvinciaComponent,
     canActivate:[AuthGuard]
+  },
+  {
+    path:"home",component:HomeComponent,
+    canActivate:[AuthGuard]
+  },
+  {
+    path:"donaciones-detalle",component:DonacionesDetalleComponent,
   },
   {
     path:"registro",component:RegistroComponent,

@@ -1,12 +1,12 @@
 import { Router } from "express";
 
 import { AcompaniamientoController } from "../controllers/acompaniamiento.controllers";
-
+import { validarToken } from "../libs/verificarToken";
 const enrutadorAcomp = Router();
 
 let acompController = new AcompaniamientoController();
 
-enrutadorAcomp.route('/acompaniamiento').get(acompController.listarAcomp);
+enrutadorAcomp.route('/acompaniamiento').get(validarToken,acompController.listarAcomp);
 
 enrutadorAcomp.route('/acompaniamiento').post(acompController.crearAcomp);
 

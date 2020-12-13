@@ -1,0 +1,44 @@
+i{
+    font-size: 38px;
+    font-weight: 800;
+    display: inline-block;
+    color: #000;
+    background: #fff;
+    mix-blend-mode: multiply;
+    position: relative;
+  }
+  i:before { 
+    content: '';
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, rgb(0, 197, 187),rgb(216, 0, 205));
+    mix-blend-mode: screen; 
+    position: absolute; 
+  }
+
+  b{
+    font-size: 23px;
+    font-weight: 500;
+    display: inline-block;
+    color: #000;
+    background: #fff;
+    mix-blend-mode: multiply;
+    position: relative;
+  }
+  b:before { 
+    content: '';
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgb(0, 197, 187),rgb(216, 0, 205));
+    mix-blend-mode: screen; 
+    position: absolute; 
+  }
+
+  hr {
+    background: linear-gradient(to left, rgb(0, 197, 187),rgb(216, 0, 205));
+    height: 1px;
+  }
+  
+  

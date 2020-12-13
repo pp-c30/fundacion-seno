@@ -43,6 +43,9 @@ import { angularEditorConfig } from '@kolkov/angular-editor/lib/config';
 import { RegistroComponent } from './components/registro/registro.component';
 import { IngresoComponent } from './components/ingreso/ingreso.component';
 import { TokenInterceptorService } from "./services/token-interceptor.service";
+import { HomeComponent } from './components/home/home.component';
+import { DonacionesDetalleComponent } from './components/donaciones-detalle/donaciones-detalle.component';
+
 
 
 
@@ -72,11 +75,10 @@ import { TokenInterceptorService } from "./services/token-interceptor.service";
     GaleriaDetalleComponent,
     QuienesSomosComponent,
     RegistroComponent,
-    IngresoComponent
+    IngresoComponent,
+    HomeComponent,
+    DonacionesDetalleComponent,
 
-
-   
-   
   ],
   imports: [
     BrowserModule,

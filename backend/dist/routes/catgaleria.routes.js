@@ -2,9 +2,10 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const catgaleria_controllers_1 = require("../controllers/catgaleria.controllers");
+const verificarToken_1 = require("../libs/verificarToken");
 const enrutadorCatgaleria = express_1.Router();
 let catgaleriaController = new catgaleria_controllers_1.CatgaleriaController();
-enrutadorCatgaleria.route('/categoria_galeria').get(catgaleriaController.listarCatgaleria);
+enrutadorCatgaleria.route('/categoria_galeria').get(verificarToken_1.validarToken, catgaleriaController.listarCatgaleria);
 enrutadorCatgaleria.route('/categoria_galeria').post(catgaleriaController.crearCatgaleria);
 enrutadorCatgaleria.route('/categoria_galeria/:id').delete(catgaleriaController.eliminarCatgaleria);
 enrutadorCatgaleria.route('/categoria_galeria/:id').put(catgaleriaController.actualizarCatgaleria);

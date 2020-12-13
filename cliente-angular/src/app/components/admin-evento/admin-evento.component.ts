@@ -88,6 +88,7 @@ export class AdminEventoComponent implements OnInit {
       categoria:['',[Validators.required]],
       descripcion:['',[Validators.required, Validators.minLength(4)]],
       fecha_hora:['',[Validators.required]],
+      
       organizadora:['',[Validators.required, Validators.minLength(4)]],
       responsable:['',[Validators.required, Validators.minLength(4)]],
       precio:['',[Validators.required]],

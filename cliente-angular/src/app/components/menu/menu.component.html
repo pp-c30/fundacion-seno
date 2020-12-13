@@ -4,6 +4,13 @@
     <mat-toolbar color="primary">
       <img src="assets/logo.png" width="10%" height="100%" alt="">
       &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;  
+
+      <a routerLink="home" style="color: white;" >
+        <button mat-icon-button class="icon home-icon btn btn-light" aria-label="">
+          <mat-icon>home</mat-icon>
+        </button>
+      </a>&nbsp;&nbsp;&nbsp;
+      
         <div>
           <a class="nav-link dropdown" href="" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="text-decoration: none; color:#ffffff;" class="lead" *ngIf="autServ.verificarUsuarioLogueado()"> 
             Formularios
@@ -11,7 +18,7 @@
           <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink"   >
             <a class="dropdown-item" routerLink="provincia" >Provincia</a>
             <a class="dropdown-item" routerLink="localidad"> Localidad </a>
-            <a class="dropdown-item" routerLink="tipo-acompaniamiento"> Tipo de Acompañamiento   </a>
+            <a class="dropdown-item" routerLink="tipo-acompaniamiento"> Descripcion de HOME </a>
             <a class="dropdown-item" routerLink="categoria-donaciones"> Categoria Donaciones   </a>
             <a class="dropdown-item" routerLink="categoria-galeria"> Categoria Galeria  </a>
             <a class="dropdown-item" routerLink="categoria-evento"> Categoria Eventos  </a>
@@ -55,7 +62,7 @@
 
          </a> &nbsp;&nbsp;&nbsp; &nbsp;
         
-        <a href="https://mpago.la/1qHWtaJ" style="text-decoration: none; color:#ffffff; " class="lead" target="_blank">
+        <a routerLink="donaciones-detalle" style="text-decoration: none; color:#ffffff; " class="lead" >
          Donaciones
         </a>&nbsp;&nbsp;&nbsp; &nbsp;
 

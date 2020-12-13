@@ -1,11 +1,11 @@
 import { Router } from "express";
 import { QuienesController } from "../controllers/quienes.controllers";
-
+import { validarToken } from "../libs/verificarToken";
 const enrutadorQuienes_somos = Router();
 
 let quienesController = new QuienesController();
 
-enrutadorQuienes_somos.route('/quienes').get(quienesController.listarQuienes);
+enrutadorQuienes_somos.route('/quienes').get(validarToken,quienesController.listarQuienes);
 
 enrutadorQuienes_somos.route('/quienes').post(quienesController.crearQuienes);
 

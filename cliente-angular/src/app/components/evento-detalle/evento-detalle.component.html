@@ -1,8 +1,11 @@
 <br>
 <div class="container">
   <div class="row">
-    <div class="container" style="color: #008d81 ; font-size:xxx-large;" >
-      {{titulo}}
+    <div class="col-lg-8">
+      <b><i>{{titulo}}</i></b>
+    </div> 
+    <div align="center">
+      <b><i>{{fecha_hora}}</i></b>
     </div>
   </div><br><br>
     <div class="row">
@@ -32,9 +35,7 @@
         </div>  
     </div><br><br>
     <div class="row">
-      <div [innerHtml]="descripcion">    
-          
-      </div>
+      <h3><div [innerHtml]="descripcion"></div></h3>
     </div>
       <br>
   <div class="container">

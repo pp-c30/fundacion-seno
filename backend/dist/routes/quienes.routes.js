@@ -2,9 +2,10 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const quienes_controllers_1 = require("../controllers/quienes.controllers");
+const verificarToken_1 = require("../libs/verificarToken");
 const enrutadorQuienes_somos = express_1.Router();
 let quienesController = new quienes_controllers_1.QuienesController();
-enrutadorQuienes_somos.route('/quienes').get(quienesController.listarQuienes);
+enrutadorQuienes_somos.route('/quienes').get(verificarToken_1.validarToken, quienesController.listarQuienes);
 enrutadorQuienes_somos.route('/quienes').post(quienesController.crearQuienes);
 enrutadorQuienes_somos.route('/quienes/:id').delete(quienesController.eliminarQuienes);
 enrutadorQuienes_somos.route('/quienes/:id').put(quienesController.actualizarQuienes);

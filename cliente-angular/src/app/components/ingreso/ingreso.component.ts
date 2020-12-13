@@ -28,7 +28,7 @@ export class IngresoComponent implements OnInit {
     this.autServ.login(this.formIngreso.value).subscribe(
       respuesta =>{
         localStorage.setItem('token',String(respuesta));
-        this.route.navigate(['/provincia']);
+        this.route.navigate(['/home']);
       }
     )
   }

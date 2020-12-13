@@ -1,11 +1,11 @@
 import { Router } from "express";
 import { DonacionesController } from "../controllers/donaciones.controllers";
-
+import { validarToken } from "../libs/verificarToken";
 const enrutadorDonaciones = Router();
 
 let donacionesController = new DonacionesController();
 
-enrutadorDonaciones.route('/donaciones').get(donacionesController.listarDonaciones);
+enrutadorDonaciones.route('/donaciones').get(validarToken,donacionesController.listarDonaciones);
 
 enrutadorDonaciones.route('/donaciones').post(donacionesController.crearDonaciones);
 

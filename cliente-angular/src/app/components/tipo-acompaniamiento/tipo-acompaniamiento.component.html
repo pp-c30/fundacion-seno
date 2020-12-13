@@ -2,13 +2,20 @@
 <br>
 <div class="container">
     <div class="row">
-        <div class="col-sm-8">
+        <div class="col-sm-12">
                 <div class="row">
-                   <div class="col-sm-6">
+                   <div class="col-sm-3">
                        <div class="form-group">
-                        <input placeholder="Ingrese tipo de acompañamiento a buscar" [(ngModel)]="buscarAcomp" type="text" class="form-control">
+                        <input placeholder="Ingrese descripcion buscar" [(ngModel)]="buscarAcomp" type="text" class="form-control">
                        </div>
                    </div>
+                   <div class="=col-sm-2">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal">
+                            Agregar descripcion
+                        </button>
+                    </div>  
+                </div>
                 </div>
             <table class="table table-striped">
                 <thead>
@@ -21,13 +28,13 @@
                 <tbody>
                     <tr *ngFor="let acompaniamiento of listAcomp | filter:buscarAcomp | paginate:{itemsPerPage:5, currentPage:p}">
                         <td>{{acompaniamiento.id_acomp}}</td>
-                        <td>{{acompaniamiento.descripcion}}</td>
+                        <td [innerHtml]="acompaniamiento.descripcion"></td>
                         <td>
                             <div class="btn-group">
                                 <button (click)="eliminarAcomp(acompaniamiento.id_acomp);"mat-icon-button class="icon delete-icon btn btn-danger" aria-label="">
                                     <mat-icon>delete</mat-icon>
                                 </button>
-                                <button (click)="editarAcomp(acompaniamiento)" mat-icon-button class="icon create-icon btn btn-primary" aria-label="">
+                                <button (click)="editarAcomp(acompaniamiento)" mat-icon-button class="icon create-icon btn btn-primary" aria-label="" data-toggle="modal" data-target="#exampleModal">
                                     <mat-icon>create</mat-icon>
                                 </button>
                             </div>
@@ -41,28 +48,42 @@
                         <pagination-controls (pageChange)="p = $event" ></pagination-controls>
                     </div>
                 </div>
-        </div>
-        <div class="col-sm-4">
-            <div class="card">
-                <div class="card-header">Formulario de acompañamiento</div>
-                <div class="card-body">
-                    <form [formGroup]="formAcomp" (ngSubmit)="guardarAcomp()" >
-                        <div class="form-group" >
-                        <input formControlName="id_acomp" type="hidden"class="form-control" >
-                        </div>
-                        <div class="form-group">
-                        <input [ngClass]="{'is-invalid': (formAcomp.get('descripcion')?.touched || formAcomp.get('descripcion')?.dirty) && formAcomp.get('descripcion')?.invalid }" formControlName="descripcion" placeholder="Ingrese un acompañamiento" type="text"class="form-control">
-                            <div class="invalid-feedback">
-                                <span *ngIf="formAcomp.get('descripcion').hasError('required')">Campo requerido / </span>
-                                <span *ngIf="!formAcomp.get('descripcion').hasError('minLength')">Minimo de 4 caracteres</span>
-                            </div>
-                        </div>
-                        <button [disabled]="formAcomp.invalid" class="btn btn-success">Guardar acompañamiento</button>
-                    </form>
-                </div>
-    
             </div>
-    
         </div>
     </div>
-</div>
+ 
+<div class="modal fade " id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="false" style="background-color: rgba(0, 0, 0, 0.5);" >
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title" id="exampleModalLabel">Formulario de descripcion HOME </h3>
+          <button type="button" class="close  btn btn-danger" data-dismiss="modal" aria-label="Close" >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        
+        <form [formGroup]="formAcomp" (ngSubmit)="guardarAcomp()" >   
+        <div class="modal-body">
+            <div class="form-group" >
+                <input formControlName="id_acomp" type="hidden"class="form-control" >
+                </div>
+                <div class="form-group">
+                    <angular-editor formControlName="descripcion" [config]="editorConfig" [ngClass]="{'is-invalid': (formAcomp.get('descripcion')?.touched || formAcomp.get('descripcion')?.dirty) && formAcomp.get('descripcion')?.invalid }" ></angular-editor>
+                    <div class="invalid-feedback">
+                        <span *ngIf="formAcomp.get('descripcion').hasError('required')">Campo requerido / </span>
+                        <span *ngIf="!formAcomp.get('descripcion').hasError('minLength')">Minimo de 4 caracteres</span>
+                    </div>
+                </div>
+                 
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+          <div class="btn-group">
+            <button [disabled]="formAcomp.invalid" class="btn btn-success">Guardar descripcion</button>
+          </div>
+        </div>
+
+    </form>
+      </div>
+    </div>
+  </div>

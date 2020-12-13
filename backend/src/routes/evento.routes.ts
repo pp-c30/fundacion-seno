@@ -1,14 +1,14 @@
 import { Router } from "express";
 import { EventoController } from "../controllers/evento.controllers";
 import multer from "../libs/multer";
-
+import { validarToken } from "../libs/verificarToken";
 const enrutadorEvento = Router();
 
 let eventoController = new EventoController();
 
 enrutadorEvento.route('/eventos').post(multer.array('img_evento'),eventoController.guardarEvento);
 
-enrutadorEvento.route('/eventos').get(eventoController.listarEvento);
+enrutadorEvento.route('/eventos').get(validarToken,eventoController.listarEvento);
 
 enrutadorEvento.route('/eventos-imagenes/:id_evento').get(eventoController.listarImagenesEvento);
 
