@@ -35,13 +35,13 @@ export class AutenticacionController
         const usuario = await db.query('select * from usuario where username = ?',[req.body.username]);
 
         if(!usuario[0]){
-            res.json('Usuario o contraseña incorrecta');
+            res.json(0);
         }
         else{
             const correctpassword = await bcrypt.compare(req.body.password, usuario[0].password);
 
             if(!correctpassword){
-                res.json('Contraseña incorrecta')
+                res.json(1)
             }
             else{
 

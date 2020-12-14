@@ -66,9 +66,11 @@
          Donaciones
         </a>&nbsp;&nbsp;&nbsp; &nbsp;
 
+        <a routerLink="registro" style="text-decoration: none; color:#ffffff; " class="lead" *ngIf="autServ.verificarUsuarioLogueado()">Registrarse</a>
+        &nbsp;&nbsp;&nbsp; &nbsp;
+
          <ng-container *ngIf="!autServ.verificarUsuarioLogueado();else cierresesion">
-          <a routerLink="registro" style="text-decoration: none; color:#ffffff; " class="lead">Registrarse</a>
-          &nbsp;&nbsp;&nbsp; &nbsp;
+         
            <a routerLink="ingreso" style="text-decoration: none; color:#ffffff; " class="lead">Ingresar</a>
          </ng-container>
          <ng-template #cierresesion>

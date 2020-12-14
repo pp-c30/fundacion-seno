@@ -36,12 +36,12 @@ class AutenticacionController {
             const db = yield database_1.conexion();
             const usuario = yield db.query('select * from usuario where username = ?', [req.body.username]);
             if (!usuario[0]) {
-                res.json('Usuario o contraseña incorrecta');
+                res.json(0);
             }
             else {
                 const correctpassword = yield bcryptjs_1.default.compare(req.body.password, usuario[0].password);
                 if (!correctpassword) {
-                    res.json('Contraseña incorrecta');
+                    res.json(1);
                 }
                 else {
                     const token = jsonwebtoken_1.default.sign({ _id: usuario[0].id_usuario }, process.env.TOKEN_SECRET || '1f58hdgd', {
