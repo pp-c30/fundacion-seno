@@ -1,7 +1,7 @@
 .img-box1 img {
     transition: transform 0.25s ease;
     cursor: zoom-in;
-    width: 100%;
+    width: auto;
     height: 100%;
     overflow: hidden;
     border-radius: 15px;

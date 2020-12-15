@@ -54,7 +54,7 @@
     <div *ngFor="let galeria of lista_galeria;let i = index" class="col-lg-3" >
         <div *ngIf="galeria.estado_home == 1 ">
         <div class="img-box1" >
-            <img style="height:180px" [src]="galeria.imagen_portada" >
+            <img style="height:auto" class="img-responsive" [src]="galeria.imagen_portada" >
           </div>
     </div>
 </div>
@@ -68,7 +68,7 @@
     <div *ngFor="let evento of lista_eventos;let i = index" class="col-lg-3" >
         <div *ngIf="evento.estado_home == 1 ">
         <div class="card" style="width: 17rem;  border-radius: 15px; border-color: rgb(216, 0, 205);">
-            <img style="height:180px" [src]="evento.imagen_portada" class="card-img-top" alt="...">
+            <img style="height:auto" [src]="evento.imagen_portada" class="img-responsive" alt="...">
             <div class="card-body">
               <h3 class="card-title"><b>{{evento.titulo}}</b></h3>
               <h3 class="card-title">Fecha y hora: {{evento.fecha_hora}}</h3>
@@ -87,7 +87,7 @@
 <div class="row">
   <div *ngFor="let cuidados of lista_cuidados" class="col-lg-3" >
       <div class="card" style="width: 17rem;  border-radius: 15px; border-color: #ff9100bd;">
-          <img style="height:180px" [src]="cuidados.imagen_portada" class="card-img-top" alt="...">
+          <img style="height:auto" [src]="cuidados.imagen_portada" class="img-responsive" alt="...">
           <div class="card-body">
             <h3 class="card-title"><b>{{cuidados.titulo}}</b></h3>
             <a type="button" class="btn btn-outline-info" (click)="verMasCuidados(cuidados)" >Ver mas</a>
